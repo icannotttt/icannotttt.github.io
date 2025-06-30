@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="使用教程 首先贴上siesta学习官网，上面有非常实用的教程，新手必备。 安装 有管理员权限的朋友直接安装官网上的流程安装即可。 没有管理员权限，但是有网的朋友来说也是非常简单。 贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，安装教程 学习教程 首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境： 1234git clone https:&#x2F;&#x2F;gitlab.com&#x2F;siesta-pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一些siesta学习需要的内容">
+<meta property="og:url" content="https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="欢迎来到我的小站">
+<meta property="og:description" content="使用教程 首先贴上siesta学习官网，上面有非常实用的教程，新手必备。 安装 有管理员权限的朋友直接安装官网上的流程安装即可。 没有管理员权限，但是有网的朋友来说也是非常简单。 贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，安装教程 学习教程 首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境： 1234git clone https:&#x2F;&#x2F;gitlab.com&#x2F;siesta-pro">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-30T13:14:36.785Z">
+<meta property="article:modified_time" content="2025-06-30T13:36:24.774Z">
+<meta property="article:author" content="GD">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>记录一些siesta学习需要的内容</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&text=记录一些siesta学习需要的内容"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&is_video=false&description=记录一些siesta学习需要的内容"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=记录一些siesta学习需要的内容&body=Check out this article: https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&name=记录一些siesta学习需要的内容&description=&lt;h2 id=&#34;使用教程&#34;&gt;使用教程&lt;/h2&gt;
+&lt;p&gt;首先贴上&lt;a href=&#34;https://docs.siesta-project.org/projects/siesta/en/stable/&#34;&gt;siesta学习官网&lt;/a&gt;，上面有非常实用的教程，新手必备。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;有管理员权限的朋友直接安装官网上的流程安装即可。&lt;/p&gt;
+&lt;p&gt;没有管理员权限，但是有网的朋友来说也是非常简单。&lt;br&gt;
+贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，&lt;a href=&#34;https://zhuanlan.zhihu.com/p/5881660276&#34;&gt;安装教程&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;学习教程&#34;&gt;学习教程&lt;/h2&gt;
+&lt;p&gt;首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://gitlab.com/siesta-project/documentation/siesta-docs.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; siesta-docs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; work-files&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bash link.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这一步是必须的，必须进入这个地方才能找到教程上的程序&lt;/p&gt;
+&lt;h2 id=&#34;实用工具&#34;&gt;实用工具&lt;/h2&gt;
+&lt;p&gt;非常奇怪，看siesta的程序，实际上可使用的工具有很多，但是教程写得让人看不明白，就比如这个画能带图&lt;br&gt;
+明明已经写了很好的工具：gnuplot&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;gnubands -F -G -o bandstructure -E 10 -e -20 *.bands&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnuplot --persist -e &lt;span class=&#34;string&#34;&gt;&amp;quot;set grid&amp;quot;&lt;/span&gt; bandstructure.gplot&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以很快得到能带图。&lt;br&gt;
+但是放在&lt;br&gt;
+siesta-5.2.2/siesta/Util&lt;br&gt;
+这个部分还有相当一部分工具可以使用，却需要自己研究一下，教程里没写。&lt;/p&gt;
+&lt;h2 id=&#34;赝势下载&#34;&gt;赝势下载&lt;/h2&gt;
+&lt;p&gt;存一个还在的赝势网站，现在siesta提倡用atom自己生成，说实话对新手来说有点难度&lt;br&gt;
+&lt;a href=&#34;https://www.simuneatomistics.com/siesta-toolkit/siesta-pseudos-and-basis-database/#&#34;&gt;赝势网站&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&t=记录一些siesta学习需要的内容"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">使用教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">学习教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">4.</span> <span class="toc-text">实用工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9D%E5%8A%BF%E4%B8%8B%E8%BD%BD"><span class="toc-number">5.</span> <span class="toc-text">赝势下载</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        记录一些siesta学习需要的内容
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">GD</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-30T13:14:36.785Z" class="dt-published" itemprop="datePublished">2025-06-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/siesta%E5%AD%A6%E4%B9%A0/">siesta学习</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="使用教程">使用教程</h2>
+<p>首先贴上<a target="_blank" rel="noopener" href="https://docs.siesta-project.org/projects/siesta/en/stable/">siesta学习官网</a>，上面有非常实用的教程，新手必备。</p>
+<h2 id="安装">安装</h2>
+<p>有管理员权限的朋友直接安装官网上的流程安装即可。</p>
+<p>没有管理员权限，但是有网的朋友来说也是非常简单。<br>
+贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/5881660276">安装教程</a></p>
+<h2 id="学习教程">学习教程</h2>
+<p>首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitlab.com/siesta-project/documentation/siesta-docs.git</span><br><span class="line"><span class="built_in">cd</span> siesta-docs</span><br><span class="line"><span class="built_in">cd</span> work-files</span><br><span class="line">bash link.sh</span><br></pre></td></tr></table></figure>
+<p>这一步是必须的，必须进入这个地方才能找到教程上的程序</p>
+<h2 id="实用工具">实用工具</h2>
+<p>非常奇怪，看siesta的程序，实际上可使用的工具有很多，但是教程写得让人看不明白，就比如这个画能带图<br>
+明明已经写了很好的工具：gnuplot</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gnubands -F -G -o bandstructure -E 10 -e -20 *.bands</span><br><span class="line">gnuplot --persist -e <span class="string">&quot;set grid&quot;</span> bandstructure.gplot</span><br></pre></td></tr></table></figure>
+<p>可以很快得到能带图。<br>
+但是放在<br>
+siesta-5.2.2/siesta/Util<br>
+这个部分还有相当一部分工具可以使用，却需要自己研究一下，教程里没写。</p>
+<h2 id="赝势下载">赝势下载</h2>
+<p>存一个还在的赝势网站，现在siesta提倡用atom自己生成，说实话对新手来说有点难度<br>
+<a target="_blank" rel="noopener" href="https://www.simuneatomistics.com/siesta-toolkit/siesta-pseudos-and-basis-database/#">赝势网站</a></p>
+<span id="more"></span>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">使用教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">学习教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">4.</span> <span class="toc-text">实用工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9D%E5%8A%BF%E4%B8%8B%E8%BD%BD"><span class="toc-number">5.</span> <span class="toc-text">赝势下载</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&text=记录一些siesta学习需要的内容"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&is_video=false&description=记录一些siesta学习需要的内容"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=记录一些siesta学习需要的内容&body=Check out this article: https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&title=记录一些siesta学习需要的内容"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&name=记录一些siesta学习需要的内容&description=&lt;h2 id=&#34;使用教程&#34;&gt;使用教程&lt;/h2&gt;
+&lt;p&gt;首先贴上&lt;a href=&#34;https://docs.siesta-project.org/projects/siesta/en/stable/&#34;&gt;siesta学习官网&lt;/a&gt;，上面有非常实用的教程，新手必备。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;有管理员权限的朋友直接安装官网上的流程安装即可。&lt;/p&gt;
+&lt;p&gt;没有管理员权限，但是有网的朋友来说也是非常简单。&lt;br&gt;
+贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，&lt;a href=&#34;https://zhuanlan.zhihu.com/p/5881660276&#34;&gt;安装教程&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;学习教程&#34;&gt;学习教程&lt;/h2&gt;
+&lt;p&gt;首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://gitlab.com/siesta-project/documentation/siesta-docs.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; siesta-docs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; work-files&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;bash link.sh&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这一步是必须的，必须进入这个地方才能找到教程上的程序&lt;/p&gt;
+&lt;h2 id=&#34;实用工具&#34;&gt;实用工具&lt;/h2&gt;
+&lt;p&gt;非常奇怪，看siesta的程序，实际上可使用的工具有很多，但是教程写得让人看不明白，就比如这个画能带图&lt;br&gt;
+明明已经写了很好的工具：gnuplot&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;gnubands -F -G -o bandstructure -E 10 -e -20 *.bands&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;gnuplot --persist -e &lt;span class=&#34;string&#34;&gt;&amp;quot;set grid&amp;quot;&lt;/span&gt; bandstructure.gplot&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;可以很快得到能带图。&lt;br&gt;
+但是放在&lt;br&gt;
+siesta-5.2.2/siesta/Util&lt;br&gt;
+这个部分还有相当一部分工具可以使用，却需要自己研究一下，教程里没写。&lt;/p&gt;
+&lt;h2 id=&#34;赝势下载&#34;&gt;赝势下载&lt;/h2&gt;
+&lt;p&gt;存一个还在的赝势网站，现在siesta提倡用atom自己生成，说实话对新手来说有点难度&lt;br&gt;
+&lt;a href=&#34;https://www.simuneatomistics.com/siesta-toolkit/siesta-pseudos-and-basis-database/#&#34;&gt;赝势网站&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://icannotttt.github.io/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/&t=记录一些siesta学习需要的内容"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    GD
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
