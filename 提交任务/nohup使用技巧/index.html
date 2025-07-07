@@ -1,357 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  <title>nohup使用学习 | 欢迎来到我的小站</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="nohup使用学习 | 欢迎来到我的小站">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="你好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://icannotttt.github.io/about/index.html">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="用nohup提交任务 1nohup sh run.sh &amp; 查看后台实时进程 1top 也可以， 1top |grep &quot;关键词&quot; 查看任务运行文件夹 1pwdx PID 用pgrep查找nohup放在后台的进程 1pgrep -f &quot;当时提交的命令&quot; 比如： 1234$ pgrep -f &quot;runforbasis&quot;3671683">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nohup使用学习">
+<meta property="og:url" content="https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="欢迎来到我的小站">
-<meta property="og:description" content="你好">
+<meta property="og:description" content="用nohup提交任务 1nohup sh run.sh &amp; 查看后台实时进程 1top 也可以， 1top |grep &quot;关键词&quot; 查看任务运行文件夹 1pwdx PID 用pgrep查找nohup放在后台的进程 1pgrep -f &quot;当时提交的命令&quot; 比如： 1234$ pgrep -f &quot;runforbasis&quot;3671683">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-07T11:26:26.000Z">
-<meta property="article:modified_time" content="2025-07-07T11:26:46.669Z">
+<meta property="article:published_time" content="2025-07-02T12:31:05.803Z">
+<meta property="article:modified_time" content="2025-07-02T12:37:46.877Z">
 <meta property="article:author" content="GD">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="icon" href="/img/touxiang.jpg">
-
-<link href="/css/style.css?v=1.1.0" rel="stylesheet">
-
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
-
-<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
-
-<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="/js/titleTip.js?v=1.1.0" ></script>
-
-<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-</script>
-
-<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-
-
-
-<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
-
-<script src="/js/iconfont.js?v=1.1.0" ></script>
-
-<meta name="generator" content="Hexo 7.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
-<div style="display: none">
-  <input class="theme_disqus_on" value="false">
-  <input class="theme_preload_comment" value="">
-  <input class="theme_blog_path" value="">
-  <input id="theme_shortcut" value="true" />
-  <input id="theme_highlight_on" value="true" />
-  <input id="theme_code_copy" value="true" />
-</div>
-
-
-
-<body>
-<aside class="nav">
-    <div class="nav-left">
-        <a href="/"
-   class="avatar_target">
-    <img class="avatar"
-         src="/img/touxiang.jpg"/>
-</a>
-<div class="author">
-    <span>GD</span>
-</div>
-
-<div class="icon">
     
-</div>
-
-
-
-
-
-<ul>
-    <li>
-        <div class="all active" data-rel="All">All
-            
-                <small>(7)</small>
-            
-        </div>
-    </li>
     
-        
-            
-                
-    <li>
-        <div data-rel="测试">
-            
-            测试
-            <small>(2)</small>
-        </div>
-        
-    </li>
-
-            
-        
-    
-        
-            
-                
-    <li>
-        <div data-rel="提交任务">
-            
-            提交任务
-            <small>(2)</small>
-        </div>
-        
-    </li>
-
-            
-        
-    
-        
-            
-                
-    <li>
-        <div data-rel="shell文本技巧">
-            
-            shell文本技巧
-            <small>(1)</small>
-        </div>
-        
-    </li>
-
-            
-        
-    
-        
-            
-                
-    <li>
-        <div data-rel="siesta学习">
-            
-            siesta学习
-            <small>(1)</small>
-        </div>
-        
-    </li>
-
-            
-        
-    
-</ul>
-<div class="left-bottom">
-    <div class="menus">
-        
-            
-            
-            
-    </div>
-    <div>
-        
-        <a 
-                                           class="friends">Friends</a>
-        
-    </div>
-</div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
-
-<div style="display: none">
-    <span id="busuanzi_value_site_uv"></span>
-    <span id="busuanzi_value_site_pv"></span>
-</div>
-
-    </div>
-    <div class="nav-right">
-        <div class="friends-area">
-    <div class="friends-title">
-        Links
-        <i class="iconfont icon-left"></i>
-    </div>
-    <div class="friends-content">
-        <ul>
-            
-            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
-            
-        </ul>
-    </div>
-</div>
-        <div class="title-list">
-    <div class="right-top">
-        <div id="default-panel">
-            <i class="iconfont icon-search" data-title="search shortcut key i"></i>
-            <div class="right-title">All</div>
-            <i class="iconfont icon-file-tree" data-title="switch to outline view shortcut key w"></i>
-        </div>
-        <div id="search-panel">
-            <i class="iconfont icon-left" data-title="return"></i>
-            <input id="local-search-input" autocomplete="off"/>
-            <label class="border-line" for="input"></label>
-            <i class="iconfont icon-case-sensitive" data-title="case sensitive"></i>
-            <i class="iconfont icon-tag" data-title="label"></i>
-        </div>
-        <div id="outline-panel" style="display: none">
-            <div class="right-title">outline</div>
-            <i class="iconfont icon-list" data-title="switch to article list"></i>
-        </div>
-    </div>
-
-    <div class="tags-list">
-    <input id="tag-search" />
-    <div class="tag-wrapper">
-        
-    </div>
-
-</div>
-
-    
-    <nav id="title-list-nav">
-        
-        
-        <a  class="All 提交任务 "
-           href="/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="nohup使用学习">nohup使用学习</span>
-            <span class="post-date" title="2025-07-02 20:31:05">2025/07/02</span>
-        </a>
-        
-        
-        <a  class="All siesta学习 "
-           href="/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="记录一些siesta学习需要的内容">记录一些siesta学习需要的内容</span>
-            <span class="post-date" title="2025-06-30 21:14:36">2025/06/30</span>
-        </a>
-        
-        
-        <a  class="All 提交任务 "
-           href="/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="记录一些提交任务需要的指令">记录一些提交任务需要的指令</span>
-            <span class="post-date" title="2025-06-30 20:41:20">2025/06/30</span>
-        </a>
-        
-        
-        <a  class="All shell文本技巧 "
-           href="/shell%E6%96%87%E6%9C%AC%E6%8A%80%E5%B7%A7/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="记录一些linux文本需要的指令">记录一些linux文本需要的指令</span>
-            <span class="post-date" title="2025-06-25 13:12:57">2025/06/25</span>
-        </a>
-        
-        
-        <a  class="All 测试 "
-           href="/%E6%B5%8B%E8%AF%95/secret/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="加密文章">加密文章</span>
-            <span class="post-date" title="2025-06-20 22:57:55">2025/06/20</span>
-        </a>
-        
-        
-        <a  class="All 测试 "
-           href="/%E6%B5%8B%E8%AF%95/test/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="搭站笔记记录">搭站笔记记录</span>
-            <span class="post-date" title="2025-06-20 22:26:00">2025/06/20</span>
-        </a>
-        
-        
-        <a  class="All "
-           href="/uncategorized/hello-world/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="Hello World">Hello World</span>
-            <span class="post-date" title="2025-06-20 21:48:46">2025/06/20</span>
-        </a>
-        
-        <div id="no-item-tips">
-
-        </div>
-    </nav>
-    <div id="outline-list">
-    </div>
-</div>
-
-    </div>
-    <div class="hide-list">
-        <div class="semicircle" data-title="Toggle full screen shortcut key s">
-            <div class="brackets first"><</div>
-            <div class="brackets">&gt;</div>
-        </div>
-    </div>
-</aside>
-<div id="post">
-    <div class="pjax">
-        <article id="post-nohup使用技巧" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">nohup使用学习</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="提交任务">提交任务</a>
-            
-        </span>
-        
-        
-    </div>
-    <div class="article-meta">
-        
-            Created At : <time class="date" title='Updated At: 2025-07-02 20:37:46'>2025-07-02 20:31</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        
-        <span id="busuanzi_container_page_pv">
-            Views 👀 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8nohup%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-text">用nohup提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%8E%E5%8F%B0%E5%AE%9E%E6%97%B6%E8%BF%9B%E7%A8%8B"><span class="toc-text">查看后台实时进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">查看任务运行文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8pgrep%E6%9F%A5%E6%89%BEnohup%E6%94%BE%E5%9C%A8%E5%90%8E%E5%8F%B0%E7%9A%84%E8%BF%9B%E7%A8%8B"><span class="toc-text">用pgrep查找nohup放在后台的进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%80%E6%AD%BB%E4%BB%BB%E5%8A%A1"><span class="toc-text">杀死任务</span></a></li></ol>
-    
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
-    }
-    .toc-level-3 i,
-    .toc-level-3 ol {
-        display: none !important;
-    }
-</style>
-</div>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="用nohup提交任务">用nohup提交任务</h2>
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>nohup使用学习</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 7.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&text=nohup使用学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&is_video=false&description=nohup使用学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nohup使用学习&body=Check out this article: https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&name=nohup使用学习&description=&lt;h2 id=&#34;用nohup提交任务&#34;&gt;用nohup提交任务&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;nohup&lt;/span&gt; sh run.sh &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;查看后台实时进程&#34;&gt;查看后台实时进程&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;top&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以，&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;top |grep &lt;span class=&#34;string&#34;&gt;&amp;quot;关键词&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;查看任务运行文件夹&#34;&gt;查看任务运行文件夹&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pwdx PID&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;用pgrep查找nohup放在后台的进程&#34;&gt;用pgrep查找nohup放在后台的进程&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pgrep -f &lt;span class=&#34;string&#34;&gt;&amp;quot;当时提交的命令&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ pgrep -f &lt;span class=&#34;string&#34;&gt;&amp;quot;runforbasis&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;367168&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3968437&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3983626&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;杀死任务&#34;&gt;杀死任务&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; PID&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;杀死当前用户所有进程，清理后台&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#终止所有&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pkill -9 -u username&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#仅终止python&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pkill -9 -u usename python&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&t=nohup使用学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8nohup%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">用nohup提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%8E%E5%8F%B0%E5%AE%9E%E6%97%B6%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">查看后台实时进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.</span> <span class="toc-text">查看任务运行文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8pgrep%E6%9F%A5%E6%89%BEnohup%E6%94%BE%E5%9C%A8%E5%90%8E%E5%8F%B0%E7%9A%84%E8%BF%9B%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">用pgrep查找nohup放在后台的进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%80%E6%AD%BB%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.</span> <span class="toc-text">杀死任务</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        nohup使用学习
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">GD</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-02T12:31:05.803Z" class="dt-published" itemprop="datePublished">2025-07-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/">提交任务</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="用nohup提交任务">用nohup提交任务</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> sh run.sh &amp;</span><br></pre></td></tr></table></figure>
 <h2 id="查看后台实时进程">查看后台实时进程</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
@@ -368,199 +199,158 @@
 <p>杀死当前用户所有进程，清理后台</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#终止所有</span></span><br><span class="line">pkill -9 -u username</span><br><span class="line"><span class="comment">#仅终止python</span></span><br><span class="line">pkill -9 -u usename python</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
-    </div>
+  </div>
 </article>
 
 
 
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-
-
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
 
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<input type="hidden" id="MathJax-js"
-        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</input>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8nohup%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">用nohup提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%8E%E5%8F%B0%E5%AE%9E%E6%97%B6%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">查看后台实时进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.</span> <span class="toc-text">查看任务运行文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8pgrep%E6%9F%A5%E6%89%BEnohup%E6%94%BE%E5%9C%A8%E5%90%8E%E5%8F%B0%E7%9A%84%E8%BF%9B%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">用pgrep查找nohup放在后台的进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%80%E6%AD%BB%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.</span> <span class="toc-text">杀死任务</span></a></li></ol>
+      </div>
     
 
-
-
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&text=nohup使用学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&is_video=false&description=nohup使用学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nohup使用学习&body=Check out this article: https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&title=nohup使用学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&name=nohup使用学习&description=&lt;h2 id=&#34;用nohup提交任务&#34;&gt;用nohup提交任务&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;nohup&lt;/span&gt; sh run.sh &amp;amp;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;查看后台实时进程&#34;&gt;查看后台实时进程&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;top&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;也可以，&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;top |grep &lt;span class=&#34;string&#34;&gt;&amp;quot;关键词&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;查看任务运行文件夹&#34;&gt;查看任务运行文件夹&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pwdx PID&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;用pgrep查找nohup放在后台的进程&#34;&gt;用pgrep查找nohup放在后台的进程&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pgrep -f &lt;span class=&#34;string&#34;&gt;&amp;quot;当时提交的命令&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;比如：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ pgrep -f &lt;span class=&#34;string&#34;&gt;&amp;quot;runforbasis&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;367168&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3968437&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3983626&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;杀死任务&#34;&gt;杀死任务&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;kill&lt;/span&gt; PID&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;杀死当前用户所有进程，清理后台&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#终止所有&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pkill -9 -u username&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;#仅终止python&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pkill -9 -u usename python&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/&t=nohup使用学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    <div class="copyright">
-        <p class="footer-entry">
-    ©2016-2020 Yelog
-</p>
-<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
-    <div class="full-toc">
-        <button class="full" data-title="Toggle full screen shortcut key s"><span class="min "></span></button>
-<a class="" id="rocket" ></a>
 
-    </div>
+  </div>
 </div>
 
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    GD
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
 </body>
-<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
-
-<script src="/js/script.js?v=1.1.0" ></script>
-<script>
-    var img_resize = 'default';
-    function initArticle() {
-        /*渲染对应的表格样式*/
-        
-            $("#post .pjax table").addClass("green_title");
-        
-
-        /*渲染打赏样式*/
-        
-
-        /*高亮代码块行号*/
-        
-
-        /*访问数量*/
-        
-        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
-        
-
-        /*代码高亮，行号对齐*/
-        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
-
-        
-        
-    }
-
-    /*打赏页面隐藏与展示*/
-    
-
-</script>
-
-<!--加入行号的高亮代码块样式-->
-
-<!--自定义样式设置-->
-<style>
-    
-    
-    .nav {
-        width: 542px;
-    }
-    .nav.fullscreen {
-        margin-left: -542px;
-    }
-    .nav-left {
-        width: 120px;
-    }
-    
-    
-    @media screen and (max-width: 1468px) {
-        .nav {
-            width: 492px;
-        }
-        .nav.fullscreen {
-            margin-left: -492px;
-        }
-        .nav-left {
-            width: 100px;
-        }
-    }
-    
-    
-    @media screen and (max-width: 1024px) {
-        .nav {
-            width: 492px;
-            margin-left: -492px
-        }
-        .nav.fullscreen {
-            margin-left: 0;
-        }
-    }
-    
-    @media screen and (max-width: 426px) {
-        .nav {
-            width: 100%;
-        }
-        .nav-left {
-            width: 100%;
-        }
-    }
-    
-    
-    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
-        color: #383636;
-    }
-    
-    
-    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
-        color: #5e5e5f;
-    }
-    
-    
-    .nav-right nav a.hover, #local-search-result a.hover{
-        background-color: #e2e0e0;
-    }
-    
-    
-
-    /*列表样式*/
-    
-
-    /* 背景图样式 */
-    
-    
-
-
-    /*引用块样式*/
-    
-
-    /*文章列表背景图*/
-    
-
-    
-</style>
-
-
-
-
-
-
-
 </html>
