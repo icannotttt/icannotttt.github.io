@@ -6,15 +6,15 @@
   <meta name="keywords" content="">
   <meta name="description" content="记录一些linux文本需要的指令 | 欢迎来到我的小站">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="你好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://icannotttt.github.io/about/index.html">
+<meta name="description" content="用nohup提交任务 1nohup sh run.sh &amp; 查看后台实时进程 1top 也可以， 1top |grep &quot;关键词&quot; 查看任务运行文件夹 1pwdx PID 用pgrep查找nohup放在后台的进程 1pgrep -f &quot;当时提交的命令&quot; 比如： 1234$ pgrep -f &quot;runforbasis&quot;3671683">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nohup使用学习">
+<meta property="og:url" content="https://icannotttt.github.io/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="欢迎来到我的小站">
-<meta property="og:description" content="你好">
+<meta property="og:description" content="用nohup提交任务 1nohup sh run.sh &amp; 查看后台实时进程 1top 也可以， 1top |grep &quot;关键词&quot; 查看任务运行文件夹 1pwdx PID 用pgrep查找nohup放在后台的进程 1pgrep -f &quot;当时提交的命令&quot; 比如： 1234$ pgrep -f &quot;runforbasis&quot;3671683">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-07T11:26:26.000Z">
-<meta property="article:modified_time" content="2025-07-07T11:26:46.669Z">
+<meta property="article:published_time" content="2025-07-02T12:31:05.803Z">
+<meta property="article:modified_time" content="2025-07-02T12:37:46.877Z">
 <meta property="article:author" content="GD">
 <meta name="twitter:card" content="summary">
 
@@ -373,7 +373,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">dir</span>=$(<span class="built_in">pwd</span>)</span><br><span class="line">files=$(<span class="built_in">ls</span> poscar)</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> <span class="variable">$files</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line"><span class="built_in">rm</span> -r <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">mkdir</span> <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">mkdir</span> poscar</span><br><span class="line">name1=<span class="variable">$dir</span>/poscar/<span class="variable">$filename</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>;i&lt;<span class="number">6</span>;i+=<span class="number">1</span>))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">name2=POSCAR_<span class="variable">$&#123;i&#125;</span></span><br><span class="line"><span class="built_in">cp</span> <span class="variable">$name1</span> <span class="variable">$name2</span></span><br><span class="line">e1=$(sed -n <span class="string">&quot;5 p&quot;</span> <span class="variable">$name2</span>  |awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$e1</span></span><br><span class="line">e1_1=$(<span class="built_in">echo</span> <span class="string">&quot;scale=10; (0+ 0.985+ <span class="variable">$&#123;i&#125;</span>*0.005)  *<span class="variable">$&#123;e1&#125;</span> &quot;</span> | bc)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$e1_1</span></span><br><span class="line">sed -i <span class="string">&quot;5s/<span class="variable">$&#123;e1&#125;</span>/<span class="variable">$&#123;e1_1&#125;</span>/&quot;</span> <span class="variable">$name2</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
       
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源。 </span>
     </div>
 </article>
 
