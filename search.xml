@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>nohup使用学习</title>
+      <link href="/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+      <url>/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/nohup%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<h2 id="用nohup提交任务">用nohup提交任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> sh run.sh &amp;</span><br></pre></td></tr></table></figure><h2 id="查看后台实时进程">查看后台实时进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure><p>也可以，</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top |grep <span class="string">&quot;关键词&quot;</span></span><br></pre></td></tr></table></figure><h2 id="查看任务运行文件夹">查看任务运行文件夹</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwdx PID</span><br></pre></td></tr></table></figure><h2 id="用pgrep查找nohup放在后台的进程">用pgrep查找nohup放在后台的进程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep -f <span class="string">&quot;当时提交的命令&quot;</span></span><br></pre></td></tr></table></figure><p>比如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep -f <span class="string">&quot;runforbasis&quot;</span></span><br><span class="line">367168</span><br><span class="line">3968437</span><br><span class="line">3983626</span><br></pre></td></tr></table></figure><h2 id="杀死任务">杀死任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> PID</span><br></pre></td></tr></table></figure><p>杀死当前用户所有进程，清理后台</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#终止所有</span></span><br><span class="line">pkill -9 -u username</span><br><span class="line"><span class="comment">#仅终止python</span></span><br><span class="line">pkill -9 -u usename python</span><br></pre></td></tr></table></figure><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 提交任务 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记录一些siesta学习需要的内容</title>
+      <link href="/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/"/>
+      <url>/siesta%E5%AD%A6%E4%B9%A0/siesta%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="使用教程">使用教程</h2><p>首先贴上<a href="https://docs.siesta-project.org/projects/siesta/en/stable/">siesta学习官网</a>，上面有非常实用的教程，新手必备。</p><h2 id="安装">安装</h2><p>有管理员权限的朋友直接安装官网上的流程安装即可。</p><p>没有管理员权限，但是有网的朋友来说也是非常简单。<br>贴上我使用的教程，感谢知乎上的橙猫，教程简洁凝练，<a href="https://zhuanlan.zhihu.com/p/5881660276">安装教程</a></p><h2 id="学习教程">学习教程</h2><p>首先，不论学习目的是什么，请先按照教程上的流程，布置本地环境：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://gitlab.com/siesta-project/documentation/siesta-docs.git</span><br><span class="line"><span class="built_in">cd</span> siesta-docs</span><br><span class="line"><span class="built_in">cd</span> work-files</span><br><span class="line">bash link.sh</span><br></pre></td></tr></table></figure><p>这一步是必须的，必须进入这个地方才能找到教程上的程序</p><h2 id="实用工具">实用工具</h2><p>非常奇怪，看siesta的程序，实际上可使用的工具有很多，但是教程写得让人看不明白，就比如这个画能带图<br>明明已经写了很好的工具：gnuplot</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gnubands -F -G -o bandstructure -E 10 -e -20 *.bands</span><br><span class="line">gnuplot --persist -e <span class="string">&quot;set grid&quot;</span> bandstructure.gplot</span><br></pre></td></tr></table></figure><p>可以很快得到能带图。<br>但是放在<br>siesta-5.2.2/siesta/Util<br>这个部分还有相当一部分工具可以使用，却需要自己研究一下，教程里没写。</p><h2 id="赝势下载">赝势下载</h2><p>存一个还在的赝势网站，现在siesta提倡用atom自己生成，说实话对新手来说有点难度<br><a href="https://www.simuneatomistics.com/siesta-toolkit/siesta-pseudos-and-basis-database/#">赝势网站</a></p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> siesta学习 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记录一些提交任务需要的指令</title>
+      <link href="/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/"/>
+      <url>/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1/</url>
+      
+        <content type="html"><![CDATA[<p>SBATCH系统：</p><h2 id="简单提交任务文件：">简单提交任务文件：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#SBATCH -N 1  #需要节点</span></span><br><span class="line"><span class="comment">#SBATCH -n 32  #需要核数</span></span><br><span class="line"><span class="comment">##SBATCH -w, --nodelist=node[3]  #指定节点</span></span><br><span class="line"><span class="built_in">source</span> INTER环境/oneapi/setvars.sh --force &gt;&gt; /dev/null</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:/xx/lib/release/ <span class="comment">#指定库的位置</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ulimit</span> -s unlimited <span class="comment">#修改限制</span></span><br><span class="line"><span class="built_in">ulimit</span> -v unlimited  <span class="comment">#修改使用内存限制</span></span><br><span class="line">sh run.sh</span><br></pre></td></tr></table></figure><h2 id="for循环并行提交任务：">for循环并行提交任务：</h2><p>前面都一样<br>如果写了n个任务</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ((count=<span class="number">1</span>; count &lt; max_iterations; count++)); <span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">sh run_<span class="variable">$&#123;count&#125;</span>.sh</span><br><span class="line">&#125;&amp;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure><h2 id="sed改变输入文件提交任务">sed改变输入文件提交任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ((count=<span class="number">1</span>; count &lt; max_iterations; count++)); <span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">shift</span>=$(<span class="built_in">echo</span> <span class="string">&quot;scale=10;100-<span class="variable">$count</span> *2&quot;</span> | bc)</span><br><span class="line">e1=$(grep -n -r PAO.EnergyShift BaTiO3.fdf |  awk <span class="string">&#x27;NR==1&#x27;</span> |awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>)</span><br><span class="line">sed -i <span class="string">&quot;30s/<span class="variable">$&#123;e1&#125;</span>/<span class="variable">$&#123;shift&#125;</span>/&quot;</span> BaTiO3.fdf</span><br><span class="line">siesta &lt;BaTiO3.fdf &gt;out</span><br><span class="line">&#125;&amp;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure><h2 id="检查满足条件时跳出循环-退出任务">检查满足条件时跳出循环，退出任务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检查是否满足条件（示例：d大于0.6，小于1.5时跳出）</span></span><br><span class="line">   <span class="keyword">if</span> [ $(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$d</span> &gt;= 0.6 &amp;&amp; <span class="variable">$d</span> &lt;= 1.5&quot;</span> | bc) -eq 1 ]; <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;get out, break&quot;</span></span><br><span class="line">       <span class="built_in">break</span></span><br><span class="line">   <span class="keyword">fi</span></span><br></pre></td></tr></table></figure><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 提交任务 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记录一些linux文本需要的指令</title>
+      <link href="/shell%E6%96%87%E6%9C%AC%E6%8A%80%E5%B7%A7/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/"/>
+      <url>/shell%E6%96%87%E6%9C%AC%E6%8A%80%E5%B7%A7/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<p>记录一些linux文本需要的指令</p><h2 id="查看特殊字符：">查看特殊字符：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> -A filename</span><br></pre></td></tr></table></figure><h2 id="去掉文件中的m-这个-m用ctrl-v和ctrl-m打出来-：">去掉文件中的M，这个^M用ctrl+V和ctrl+M打出来 ：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/^M//g&#x27;</span> filename</span><br></pre></td></tr></table></figure><h2 id="去掉文件的前三个字符：">去掉文件的前三个字符：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/^...//g&#x27;</span> filename</span><br></pre></td></tr></table></figure><h2 id="提取文件第2行第3量作为变量：">提取文件第2行第3量作为变量：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">third_column=$(awk <span class="string">&#x27;NR==2 &#123;print $3&#125;&#x27;</span> data.txt)</span><br><span class="line">third_column=$(<span class="built_in">cut</span> -d<span class="string">&#x27; &#x27;</span> -f3 data.txt)</span><br></pre></td></tr></table></figure><h2 id="特殊分隔符分割的：">特殊分隔符分割的：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n=2  <span class="comment"># 指定行号</span></span><br><span class="line">delimiter=<span class="string">&quot;;&quot;</span>  <span class="comment"># 指定分隔符</span></span><br><span class="line">third_column=$(awk -v n=<span class="string">&quot;<span class="variable">$n</span>&quot;</span> -v FS=<span class="string">&quot;<span class="variable">$delimiter</span>&quot;</span> <span class="string">&#x27;NR==n &#123;print $3&#125;&#x27;</span> data.txt)</span><br></pre></td></tr></table></figure><h2 id="使用cat和eof输出变量到文件：">使用cat和EOF输出变量到文件：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; output.txt</span></span><br><span class="line"><span class="string">Column 3 value: $third_column</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure><h2 id="bc管道计算的时候小数部分不输出导致格式识别错误-加一个适配格式的0即可：">bc管道计算的时候小数部分不输出导致格式识别错误，加一个适配格式的0即可：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result=$(<span class="built_in">echo</span> <span class="string">&quot;scale=2; 10 / 3+0.00&quot;</span> | bc)</span><br></pre></td></tr></table></figure><h2 id="识别文件夹内的文件名-并创建新文件夹-在新文件夹中进行一些任务">识别文件夹内的文件名，并创建新文件夹，在新文件夹中进行一些任务;</h2><p>示例是一个拉伸的文本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">dir</span>=$(<span class="built_in">pwd</span>)</span><br><span class="line">files=$(<span class="built_in">ls</span> poscar)</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> <span class="variable">$files</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line"><span class="built_in">rm</span> -r <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">mkdir</span> <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$filename</span></span><br><span class="line"><span class="built_in">mkdir</span> poscar</span><br><span class="line">name1=<span class="variable">$dir</span>/poscar/<span class="variable">$filename</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>;i&lt;<span class="number">6</span>;i+=<span class="number">1</span>))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">name2=POSCAR_<span class="variable">$&#123;i&#125;</span></span><br><span class="line"><span class="built_in">cp</span> <span class="variable">$name1</span> <span class="variable">$name2</span></span><br><span class="line">e1=$(sed -n <span class="string">&quot;5 p&quot;</span> <span class="variable">$name2</span>  |awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $3&#125;&#x27;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$e1</span></span><br><span class="line">e1_1=$(<span class="built_in">echo</span> <span class="string">&quot;scale=10; (0+ 0.985+ <span class="variable">$&#123;i&#125;</span>*0.005)  *<span class="variable">$&#123;e1&#125;</span> &quot;</span> | bc)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$e1_1</span></span><br><span class="line">sed -i <span class="string">&quot;5s/<span class="variable">$&#123;e1&#125;</span>/<span class="variable">$&#123;e1_1&#125;</span>/&quot;</span> <span class="variable">$name2</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> shell文本技巧 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>加密文章</title>
+      <link href="/%E6%B5%8B%E8%AF%95/secret/"/>
+      <url>/%E6%B5%8B%E8%AF%95/secret/</url>
+      
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="ea001725f11ee473486bcca2fdf0e8385f8341c3d9d0e510fdc26538e60aca78">d477c8ba007a8acd2dab137c41330f6464c23d8d249f14e9fc2c9cc14648a0e2</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>搭站笔记记录</title>
+      <link href="/%E6%B5%8B%E8%AF%95/test/"/>
+      <url>/%E6%B5%8B%E8%AF%95/test/</url>
+      
+        <content type="html"><![CDATA[<p>大家好，本页的功能仅供测试<br>这是行内公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>。<br>本次博客搭站基于github，主要参考网站:<a href="https://zhuanlan.zhihu.com/p/392994381">https://zhuanlan.zhihu.com/p/392994381</a><br>仅记录自己的搭站心得<br>主题为：<a href="https://probberechts.github.io/hexo-theme-cactus/">https://probberechts.github.io/hexo-theme-cactus/</a></p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/uncategorized/hello-world/"/>
+      <url>/uncategorized/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="quick-start">Quick Start</h2><h3 id="create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
