@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>好用的移动端管理软件 | 欢迎来到我的小站</title>
+  <title>vim使用学习（kimi生成 自存） | 欢迎来到我的小站</title>
   <meta name="keywords" content="">
-  <meta name="description" content="好用的移动端管理软件 | 欢迎来到我的小站">
+  <meta name="description" content="vim使用学习（kimi生成 自存） | 欢迎来到我的小站">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="你好">
 <meta property="og:type" content="website">
@@ -335,9 +335,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-好用的终端管理" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-vim使用操作" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">好用的移动端管理软件</h1>
+        <h1 class="article-title">vim使用学习（kimi生成 自存）</h1>
     
     <div class="article-meta">
         
@@ -347,7 +347,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="杂七杂八">杂七杂八</a>
+            <a  data-rel="shell文本技巧">shell文本技巧</a>
             
         </span>
         
@@ -355,12 +355,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2025-07-27 13:54:17'>2025-07-27 13:24</time>
+            Created At : <time class="date" title='Updated At: 2025-09-14 20:49:29'>2025-09-14 20:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:79</span>
+        <span>Count:702</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -379,7 +379,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#termius%E6%B1%89%E5%8C%96%E7%89%88%E6%9C%AC"><span class="toc-text">termius汉化版本</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%80%E5%87%BA%E6%93%8D%E4%BD%9C"><span class="toc-text">退出操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%BC%8F%E5%88%87%E6%8D%A2"><span class="toc-text">模式切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8"><span class="toc-text">移动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%96%87%E6%9C%AC"><span class="toc-text">插入文本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%A1%8C"><span class="toc-text">删除行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6-%E7%B2%98%E8%B4%B4"><span class="toc-text">复制 粘贴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="toc-text">查找和替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E5%92%8C%E9%87%8D%E5%81%9A"><span class="toc-text">撤销和重做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E6%93%8D%E4%BD%9C"><span class="toc-text">窗口操作</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -395,12 +395,79 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="termius汉化版本">termius汉化版本</h2>
-<p>可以全平台登录，而且有文件夹查看的形式以及命令行，使用ipad或者手机在外出的时候非常方便，免费版本即可满足需求<br>
-<a target="_blank" rel="noopener" href="https://www.alongw.cn/termius">https://www.alongw.cn/termius</a></p>
-<p>以及仅命令行的juicessh软件也挺好用，免费版就行</p>
+        <h2 id="退出操作">退出操作</h2>
+<p>:wq：保存并退出。<br>
+:w：保存但不退出。<br>
+:q!：强制退出而不保存。<br>
+:qa：退出所有打开的文件。<br>
+:qa!：强制退出所有打开的文件，不保存任何更改。</p>
+<h2 id="模式切换">模式切换</h2>
+<p>进入插入模式：按 i 键。<br>
+返回普通模式：按 Esc 键。<br>
+进入可视模式：按 v 键。<br>
+进入可视行模式：按 V 键。<br>
+进入可视块模式：按 Ctrl+v 键。<br>
+进入命令行模式：按 : 键。</p>
+<h2 id="移动">移动</h2>
+<p>gg：跳到文件的第一行。<br>
+G：跳到文件的最后一行。<br>
+nG：跳到文件的第 n 行。<br>
+0：跳到当前行的行首。<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>：跳到当前行的行尾。</mtext><mi>g</mi><mi>g</mi><mn>0</mn><mtext>：跳到文件的第一行的行首。</mtext><mi>G</mi></mrow><annotation encoding="application/x-tex">：跳到当前行的行尾。
+gg0：跳到文件的第一行的行首。
+G</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">跳</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">尾</span><span class="mord cjk_fallback">。</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord">0</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">跳</span><span class="mord cjk_fallback">到</span><span class="mord cjk_fallback">文</span><span class="mord cjk_fallback">件</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">第</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">首</span><span class="mord cjk_fallback">。</span><span class="mord mathdefault">G</span></span></span></span>：跳到文件的最后一行的行尾。<br>
+Ctrl+f：向下翻一页。<br>
+Ctrl+b：向上翻一页。<br>
+Ctrl+d：向下翻半页。<br>
+Ctrl+u：向上翻半页。<br>
+Ctrl+e：向下滚动一行。<br>
+Ctrl+y：向上滚动一行。</p>
+<h2 id="插入文本">插入文本</h2>
+<p>i：在当前光标位置插入文本。<br>
+I：在当前行的行首插入文本。<br>
+a：在当前光标位置的后面插入文本。<br>
+A：在当前行的行尾插入文本。<br>
+o：在当前行的下面插入一行。<br>
+O：在当前行的上面插入一行。</p>
+<h2 id="删除行">删除行</h2>
+<p>dd：删除当前行。<br>
+ndd：删除从当前行开始的 n 行。<br>
+d0：删除从当前光标位置到行首的内容。<br>
+d$：删除从当前光标位置到行尾的内容。</p>
+<h2 id="复制-粘贴">复制 粘贴</h2>
+<p>复制：<br>
+yy：复制当前行。<br>
+nyy：复制从当前行开始的 n 行。<br>
+y0：复制从当前光标位置到行首的内容。<br>
+y$：复制从当前光标位置到行尾的内容。<br>
+粘贴：<br>
+p：在当前光标位置的后面粘贴。<br>
+P：在当前光标位置的前面粘贴。</p>
+<h2 id="查找和替换">查找和替换</h2>
+<p>查找：<br>
+/pattern：向下查找匹配 pattern 的内容。<br>
+?pattern：向上查找匹配 pattern 的内容。<br>
+n：查找下一个匹配项。<br>
+N：查找上一个匹配项。<br>
+替换：<br>
+:s/old/new/：在当前行替换第一个匹配的 old 为 new。<br>
+:s/old/new/g：在当前行替换所有匹配的 old 为 new。<br>
+:%s/old/new/g：在文件中替换所有匹配的 old 为 new。</p>
+<h2 id="撤销和重做">撤销和重做</h2>
+<p>撤销：<br>
+u：撤销上一次操作。<br>
+重做：<br>
+Ctrl+r：重做上一次撤销的操作。</p>
+<h2 id="窗口操作">窗口操作</h2>
+<p>分割窗口：<br>
+:split 或 :sp：水平分割窗口。<br>
+:vsplit 或 :vsp：垂直分割窗口。<br>
+切换窗口：<br>
+Ctrl+w 然后按方向键（h、j、k、l）：在窗口之间切换。<br>
+关闭窗口：<br>
+:close 或 :clo：关闭当前窗口。<br>
+:only 或 :on：关闭所有其他窗口，只保留当前窗口。</p>
 <span id="more"></span>
-
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源。 </span>
     </div>
@@ -412,6 +479,46 @@
 
 
 
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
     
 
 
