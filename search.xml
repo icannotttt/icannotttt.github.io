@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>搭站笔记记录2--域名篇</title>
+      <link href="/%E6%B5%8B%E8%AF%95/%E5%9F%9F%E5%90%8D/"/>
+      <url>/%E6%B5%8B%E8%AF%95/%E5%9F%9F%E5%90%8D/</url>
+      
+        <content type="html"><![CDATA[<p>NameSilo买了个一年的域名<br>Cloudflare解析了一下<br>github指向新域名<br>圆满结束，详细版闲了再补</p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vim使用学习（kimi生成 自存）</title>
       <link href="/shell%E6%96%87%E6%9C%AC%E6%8A%80%E5%B7%A7/vim%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
       <url>/shell%E6%96%87%E6%9C%AC%E6%8A%80%E5%B7%A7/vim%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/</url>
@@ -157,8 +176,8 @@
     
     <entry>
       <title>搭站笔记记录</title>
-      <link href="/%E6%B5%8B%E8%AF%95/test/"/>
-      <url>/%E6%B5%8B%E8%AF%95/test/</url>
+      <link href="/%E6%B5%8B%E8%AF%95/%E6%90%AD%E7%AB%99/"/>
+      <url>/%E6%B5%8B%E8%AF%95/%E6%90%AD%E7%AB%99/</url>
       
         <content type="html"><![CDATA[<p>大家好，本页的功能仅供测试<br>这是行内公式：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>。<br>本次博客搭站基于github，主要参考网站:<a href="https://zhuanlan.zhihu.com/p/392994381">https://zhuanlan.zhihu.com/p/392994381</a><br>仅记录自己的搭站心得<br>主题为：<a href="https://probberechts.github.io/hexo-theme-cactus/">https://probberechts.github.io/hexo-theme-cactus/</a></p><p>插入图测试<br><img src="/img/touxiang.jpg" alt="插入头像试试" title="甘雨"></p><h2 id="添加评论过程如图：">添加评论过程如图：</h2><p><img src="/pinglun/1.png" alt="1" title="1"><br><img src="/pinglun/2.png" alt="2" title="2"><br><img src="/pinglun/3.png" alt="3" title="3"><br><img src="/pinglun/4.png" alt="4" title="4"><br><img src="/pinglun/5.png" alt="5" title="5"><br><img src="/pinglun/6.png" alt="6" title="6"><br>livere官网：<a href="https://www.livere.com/">https://www.livere.com/</a></p><span id="more"></span>]]></content>
       

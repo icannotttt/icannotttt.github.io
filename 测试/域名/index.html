@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记录一些好用的shell脚本指令 | 欢迎来到我的小站</title>
+  <title>搭站笔记记录2--域名篇 | 欢迎来到我的小站</title>
   <meta name="keywords" content="">
-  <meta name="description" content="记录一些好用的shell脚本指令 | 欢迎来到我的小站">
+  <meta name="description" content="搭站笔记记录2--域名篇 | 欢迎来到我的小站">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="你好">
 <meta property="og:type" content="website">
@@ -359,9 +359,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-好用的shell脚本" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-域名" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">记录一些好用的shell脚本指令</h1>
+        <h1 class="article-title">搭站笔记记录2--域名篇</h1>
     
     <div class="article-meta">
         
@@ -371,7 +371,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="shell文本技巧">shell文本技巧</a>
+            <a  data-rel="测试">测试</a>
             
         </span>
         
@@ -379,7 +379,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2025-07-07 21:06:54'>2025-07-07 20:58</time>
+            Created At : <time class="date" title='Updated At: 2025-09-21 21:53:31'>2025-09-21 21:48</time>
         
     </div>
     <div class="article-meta">
@@ -412,7 +412,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E9%99%A4%E4%BA%86%E6%9F%90%E4%BA%9B%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6%E4%B9%8B%E5%A4%96%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-text">删除当前文件夹下除了某些需要的文件之外的所有文件：</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -428,9 +428,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="删除当前文件夹下除了某些需要的文件之外的所有文件：">删除当前文件夹下除了某些需要的文件之外的所有文件：</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;即将删除以下文件：&quot;</span></span><br><span class="line">find . -maxdepth 1 -<span class="built_in">type</span> f ! \( -name <span class="string">&quot;*.sh&quot;</span> -o -name <span class="string">&quot;*.fdf&quot;</span> -o -name <span class="string">&quot;nohup*&quot;</span> \) -<span class="built_in">print</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;确认删除这些文件吗？[y/N] &quot;</span> yn</span><br><span class="line"><span class="keyword">case</span> <span class="variable">$yn</span> <span class="keyword">in</span></span><br><span class="line">    [Yy]* ) find . -maxdepth 1 -<span class="built_in">type</span> f ! \( -name <span class="string">&quot;*.sh&quot;</span> -o -name <span class="string">&quot;*.fdf&quot;</span> -o -name <span class="string">&quot;nohup*&quot;</span> \) -delete</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;文件已删除&quot;</span>;;</span><br><span class="line">    * ) <span class="built_in">echo</span> <span class="string">&quot;取消删除操作&quot;</span>;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
-<p>推荐一本书：《linux_Shell脚本攻略》第二章命令之乐，看完能够理解shell脚本比我们想象得好用</p>
+        <p>NameSilo买了个一年的域名<br>
+Cloudflare解析了一下<br>
+github指向新域名<br>
+圆满结束，详细版闲了再补</p>
 <span id="more"></span>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 gdby_mail@163.com </span>
@@ -468,6 +469,46 @@
 
 
 
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
     
 
 
