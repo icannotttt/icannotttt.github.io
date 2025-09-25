@@ -4,16 +4,35 @@
   
     
     <entry>
-      <title>3D模型展示</title>
-      <link href="/3d/3d/"/>
-      <url>/3d/3d/</url>
+      <title>两个分子结构封装测试</title>
+      <link href="/3d%E7%BB%93%E6%9E%84/3d%20-%20%E5%89%AF%E6%9C%AC/"/>
+      <url>/3d%E7%BB%93%E6%9E%84/3d%20-%20%E5%89%AF%E6%9C%AC/</url>
       
-        <content type="html"><![CDATA[<h2 id="3d晶体结构">3D晶体结构</h2><div id="cifViewer" style="width: 100%; height: 400px; border: 1px solid #ddd;"></div><script>// 这里的代码不会被Hexo转义(function() {    console.log('脚本开始执行');        function initViewer() {        if (typeof Jmol === 'undefined') {            console.log('JSmol未加载，等待中...');            setTimeout(initViewer, 200);            return;        }                try {            console.log('开始初始化JSmol');            Jmol.setDocument(false);            var applet = Jmol.getApplet("cifApp", {                width: '100%',                height: 400,                use: "HTML5"            });            Jmol.setContainer(applet, "cifViewer", "100%", 400);            Jmol.script(applet, 'load "/3d/POSCAR_BaTiO3_3.cif"; spacefill 0.4; color atoms cpk;');            console.log('JSmol初始化成功');        } catch(e) {            console.error('初始化失败:', e);        }    }        // 页面加载后初始化    if (document.readyState === 'loading') {        document.addEventListener('DOMContentLoaded', initViewer);    } else {        initViewer();    }})();</script>]]></content>
+        <content type="html"><![CDATA[<h2 id="分子结构展示">分子结构展示</h2>## 分子对比<div id="viewer1" style="width: 50%; height: 500px;"></div><div id="viewer2" style="width: 50%; height: 500px;"></div><script src="/js/jsmol-helper.js"></script><script>// 初始化第一个分子initJSmol('viewer1', '/3d/a.cif');// 初始化第二个分子（带自定义配置）initJSmol('viewer2', '/3d/b.cif', {    script: "spacefill 0.3; wireframe 0.05;",    onReady: function(applet) {        console.log('第二个分子加载完成');    }});</script>]]></content>
       
       
       <categories>
           
-          <category> 3d </category>
+          <category> 3d结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>封装测试</title>
+      <link href="/3d%E7%BB%93%E6%9E%84/3d/"/>
+      <url>/3d%E7%BB%93%E6%9E%84/3d/</url>
+      
+        <content type="html"><![CDATA[<h2 id="分子结构展示">分子结构展示</h2><div id="myViewer" style="width: 100%; height: 400px;"></div><script src="/js/jsmol-helper.js"></script><script>// 使用示例 - 一行代码调用initJSmol('myViewer', '/3d/b.cif');</script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 3d结构 </category>
           
       </categories>
       
@@ -218,32 +237,6 @@
       <url>/uncategorized/hello-world/</url>
       
         <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="quick-start">Quick Start</h2><h3 id="create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JSmol加载测试</title>
-      <link href="/uncategorized/3d_test/"/>
-      <url>/uncategorized/3d_test/</url>
-      
-        <content type="html"><![CDATA[<h2 id="jsmol加载状态测试">JSmol加载状态测试</h2><div id="status" style="padding: 20px; border: 2px solid blue;">  <p id="statusText">检测中...</p></div><div id="testViewer" style="width: 100%; height: 300px; border: 1px solid red; margin: 20px 0;"></div><script>console.log('=== JSmol加载测试开始 ===');// 测试全局变量console.log('Jmol:', typeof Jmol);console.log('JSmol:', typeof JSmol);console.log('window.Jmol:', window.Jmol);// 显示状态信息function updateStatus(message) {    document.getElementById('statusText').innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;    console.log(message);}// 检查CDN是否可访问function testCDN() {    var testScript = document.createElement('script');    testScript.src = 'https://cdn.jsdelivr.net/npm/jsmol@14.32.64/JSmol.min.js';    testScript.onload = function() {        updateStatus('CDN加载成功');        checkJSmol();    };    testScript.onerror = function() {        updateStatus('CDN加载失败，尝试备用方案');        loadBackupJSmol();    };    document.head.appendChild(testScript);}// 备用加载方案function loadBackupJSmol() {    var backupScript = document.createElement('script');    backupScript.src = 'https://jsmol.org/JSmol.min.js';    backupScript.onload = function() {        updateStatus('备用CDN加载成功');        checkJSmol();    };    backupScript.onerror = function() {        updateStatus('所有CDN都失败，请检查网络');    };    document.head.appendChild(backupScript);}// 检查JSmol是否可用function checkJSmol() {    if (typeof Jmol !== 'undefined') {        updateStatus('JSmol已加载，开始初始化查看器');        initViewer();    } else {        updateStatus('JSmol对象未找到，等待中...');        setTimeout(checkJSmol, 500);    }}// 初始化查看器function initViewer() {    try {        updateStatus('正在初始化JSmol应用...');                Jmol.setDocument(false);        updateStatus('setDocument完成');                var applet = Jmol.getApplet("testApp", {            width: '100%',            height: 300,            use: "HTML5",            debug: true        });        updateStatus('getApplet完成');                Jmol.setContainer(applet, "testViewer", "100%", 300);        updateStatus('setContainer完成');                Jmol.script(applet, 'load "/structures/silicon.cif";');        updateStatus('CIF文件加载命令已发送');                document.getElementById('testViewer').style.border = '1px solid green';        updateStatus('查看器初始化完成！');            } catch(error) {        updateStatus('初始化错误: ' + error.message);        console.error(error);    }}// 开始测试updateStatus('开始加载测试...');testCDN();</script>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>完整JSmol配置</title>
-      <link href="/uncategorized/3d_test3/"/>
-      <url>/uncategorized/3d_test3/</url>
-      
-        <content type="html"><![CDATA[<h2 id="完整配置版本">完整配置版本</h2><div id="fullViewer" style="width: 100%; height: 400px; border: 2px solid green;"></div><script>function initFullJSmol() {    if (!window.Jmol) {        setTimeout(initFullJSmol, 100);        return;    }        var container = document.getElementById('fullViewer');        try {        // 完整的JSmol配置        var Info = {            width: container.clientWidth,            height: 400,            color: "0xFFFFFF",            addSelectionOptions: false,            use: "HTML5",            j2sPath: "/Jmol-16.3.33-binary/jmol-16.3.33/jsmol/jsmol/j2s",            script: "set antialiasDisplay true; load /3d/a.cif; spacefill 0.4; wireframe 0.1; color atoms cpk; background white;",            readyFunction: function(applet) {                console.log('JSmol应用准备就绪');                container.style.border = '2px solid green';            },            errorFunction: function(applet, error) {                console.error('JSmol错误:', error);                container.innerHTML = '<p style="color: red;">JSmol错误: ' + error + '</p>';            }        };                // 生成HTML并插入        var jmolHtml = Jmol.getAppletHtml('fullApp', Info);        container.innerHTML = jmolHtml;                console.log('JSmol HTML已生成');            } catch(e) {        console.error('完整配置错误:', e);        container.innerHTML = '<p>错误: ' + e.toString() + '</p>';    }}// 动态加载JSmolif (!window.Jmol) {    var script = document.createElement('script');    script.src = '/Jmol-16.3.33-binary/jmol-16.3.33/jsmol/jsmol/JSmol.min.js';    script.onload = function() {        // 给JSmol足够时间初始化        setTimeout(initFullJSmol, 1000);    };    document.head.appendChild(script);} else {    initFullJSmol();}</script>]]></content>
       
       
       
