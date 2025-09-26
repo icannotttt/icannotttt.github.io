@@ -16,9 +16,6 @@ var JmolInfo = {
 var urlParams = new URLSearchParams(window.location.search);
 var modelFile = urlParams.get('model') || "/3d/a.cif";
 
-// 添加变量来保存上传的文件内容
-var uploadedFileContent = null;
-
 // 上传CIF函数
 function uploadCIF() {
     var input = document.createElement('input');
@@ -27,34 +24,17 @@ function uploadCIF() {
     input.onchange = function(e) {
         var file = e.target.files[0];
         if (file) {
-            // 将上传的文件名记录到 modelFile 变量
+            // 将上传的文件名记录到 modeFile 变量
             modelFile = file.name;
             
             var reader = new FileReader();
             reader.onload = function(e) {
-                // 保存上传的文件内容
-                uploadedFileContent = e.target.result;
                 Jmol.script(myJmol, 'load DATA "upload"\n' + e.target.result + '\nend "upload"');
             };
             reader.readAsText(file);
         }
     };
     input.click();
-}
-
-// 创建超胞函数
-function createSupercell() {
-    var a = document.getElementById('a').value;
-    var b = document.getElementById('b').value;
-    var c = document.getElementById('c').value;
-    
-    if (uploadedFileContent) {
-        // 使用上传的文件内容创建超胞
-        Jmol.script(myJmol, 'load DATA "supercell"\n' + uploadedFileContent + '\nend "supercell" {' + a + ' ' + b + ' ' + c + '}');
-    } else {
-        // 使用原始文件路径创建超胞
-        Jmol.script(myJmol, 'load ' + modelFile + ' {' + a + ' ' + b + ' ' + c + '}');
-    }
 }
 
 $(document).ready(function(){
@@ -146,7 +126,7 @@ $(document).ready(function(){
     a: <input type="number" id="a" value="1" style="width: 60px;">
     b: <input type="number" id="b" value="1" style="width: 60px;">
     c: <input type="number" id="c" value="1" style="width: 60px;">
-    <button onclick="createSupercell()">创建</button>
+    <button onclick="Jmol.script(myJmol, 'unitcell {' + document.getElementById('a').value + ' ' + document.getElementById('b').value + ' ' + document.getElementById('c').value + '}')">创建
 </td>
 </tr>
 </table>
