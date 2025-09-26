@@ -43,6 +43,14 @@ $(document).ready(function(){
 <body>
 <!-- 添加表格开始 -->
 <table>
+<tr>
+    <td>
+        结构: 
+        <a href="javascript:Jmol.script(myJmol, 'load /3d/a.cif')">BaTiO3</a> | 
+        <a href="javascript:uploadCIF()">上传CIF文件</a> |
+    <a href="javascript:Jmol.script(myJmol, 'menu')">菜单</a>  
+    </td>
+</tr>
     <tr>
         <td>
             <!-- 原有div放入第一个td单元格 -->
@@ -70,36 +78,36 @@ $(document).ready(function(){
     </tr>
     <tr>
         <td>
-<a href="javascript:Jmol.script(myJmol, 'translate -2 0 0')">左移</a>
-<a href="javascript:Jmol.script(myJmol, 'translate 2 0 0')">右移</a>
-<a href="javascript:Jmol.script(myJmol, 'translate 0 2 0')">上移</a>
+<a href="javascript:Jmol.script(myJmol, 'translate -2 0 0')">左移</a> |
+<a href="javascript:Jmol.script(myJmol, 'translate 2 0 0')">右移</a> |
+<a href="javascript:Jmol.script(myJmol, 'translate 0 2 0')">上移</a> |
 <a href="javascript:Jmol.script(myJmol, 'translate 0 -2 0')">下移</a>
     </td>
     </tr>
     <tr>
         <td>
-<a href="javascript:Jmol.script(myJmol, 'zoom +20')">放大+</a>
-<a href="javascript:Jmol.script(myJmol, 'zoom -20')">缩小-</a>  <!-- 修正了文字 -->
+<a href="javascript:Jmol.script(myJmol, 'zoom +20')">放大+</a> |
+<a href="javascript:Jmol.script(myJmol, 'zoom -20')">缩小-</a>  
     </td>
     </tr>
     <tr>
         <td>
-<a class="control-btn" href="javascript:Jmol.script(myJmol, 'unitcell off; axes off')">去掉边框</a>
+<a class="control-btn" href="javascript:Jmol.script(myJmol, 'unitcell off; axes off')">去掉边框</a> |
 <a class="control-btn" href="javascript:Jmol.script(myJmol, 'unitcell on;  axes on')">显示边框</a>
     </td>
     </tr>
     <tr>
         <td>
-<a href="javascript:Jmol.script(myJmol, 'move 360 0 0 0 0 0 0 0 2')">绕x轴旋转</a>
-<a href="javascript:Jmol.script(myJmol, 'move 0 360 0 0 0 0 0 0 2')">绕y轴旋转</a>
+<a href="javascript:Jmol.script(myJmol, 'move 360 0 0 0 0 0 0 0 2')">绕x轴旋转</a> |
+<a href="javascript:Jmol.script(myJmol, 'move 0 360 0 0 0 0 0 0 2')">绕y轴旋转</a> |
 <a href="javascript:Jmol.script(myJmol, 'move 0 0 360 0 0 0 0 0 2')">绕z轴旋转</a>
     </td>
     </tr>
   <tr>
     <td>
-      labels <a
-      href="javascript:Jmol.script(myJmol,'if (_fileType == &quot;Pdb&quot;){select *.CA;label %n%r}else{select *;label %a};select *;')">on</a>
-      <a href="javascript:Jmol.script(myJmol,'select *;labels off')">off</a>
+      labels  |<a
+      href="javascript:Jmol.script(myJmol,'if (_fileType == &quot;Pdb&quot;){select *.CA;label %n%r}else{select *;label %a};select *;')"> on </a> |
+      <a href="javascript:Jmol.script(myJmol,'select *;labels off')"> off </a>
     </td>
   </tr>
 <tr>
@@ -112,23 +120,11 @@ $(document).ready(function(){
 </tr>
 <tr>
 <td>
-    a: <input type="number" id="a" value="1" size="2">
-    b: <input type="number" id="b" value="1" size="2">
-    c: <input type="number" id="c" value="1" size="2">
+    a: <input type="number" id="a" value="1" style="width: 60px;">
+    b: <input type="number" id="b" value="1" style="width: 60px;">
+    c: <input type="number" id="c" value="1" style="width: 60px;">
     <button onclick="Jmol.script(myJmol, 'load ' + modelFile + ' {' + document.getElementById('a').value + ' ' + document.getElementById('b').value + ' ' + document.getElementById('c').value + '}')">创建</button>
 </td>
-</tr>
-<tr>
-<td>
-    <a href="javascript:Jmol.script(myJmol, 'menu')">菜单</a>
-</td>
-</tr>
-<tr>
-    <td>
-        结构: 
-        <a href="javascript:Jmol.script(myJmol, 'load /3d/a.cif')">hBN</a> | 
-        <a href="javascript:uploadCIF()">上传CIF文件</a>  <!-- 修改了这一行 -->
-    </td>
 </tr>
 </table>
 <!-- 表格结束 -->
