@@ -8,7 +8,7 @@
       <link href="/3d%E7%BB%93%E6%9E%84/3d-online/"/>
       <url>/3d%E7%BB%93%E6%9E%84/3d-online/</url>
       
-        <content type="html"><![CDATA[<h2 id="分子结构展示">分子结构展示</h2><iframe src="/Jmol-16.3.33-binary/test/crystal-online.html" width="200%" height="700px" style="border: 1px solid #ccc;"></iframe>]]></content>
+        <content type="html"><![CDATA[<h2 id="结构展示">结构展示</h2><p>需要什么功能可留言，有空会写上</p><iframe src="/Jmol-16.3.33-binary/test/crystal-online.html" width="200%" height="900px" style="border: 1px solid #ccc;"></iframe>]]></content>
       
       
       <categories>
