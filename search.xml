@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>hBN结构</title>
+      <link href="/3d%E7%BB%93%E6%9E%84/charu/"/>
+      <url>/3d%E7%BB%93%E6%9E%84/charu/</url>
+      
+        <content type="html"><![CDATA[<p>##两原子</p><iframe src="/Jmol-16.3.33-binary/test/crystal-viewer.html?model=/3d/POSCAR_hBN_2.cif" width="200%" height="700px" style="border: 1px solid #ccc;"></iframe><p>##四原子</p><iframe src="/Jmol-16.3.33-binary/test/crystal-viewer.html?model=/3d/POSCAR_hBN_4.cif" width="200%" height="700px" style="border: 1px solid #ccc;"></iframe>]]></content>
+      
+      
+      <categories>
+          
+          <category> 3d结构 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>两个分子结构封装测试</title>
       <link href="/3d%E7%BB%93%E6%9E%84/3d%20-%20%E5%89%AF%E6%9C%AC/"/>
       <url>/3d%E7%BB%93%E6%9E%84/3d%20-%20%E5%89%AF%E6%9C%AC/</url>

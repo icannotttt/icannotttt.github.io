@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../jsmol/JSmol.min.js"></script>
+<script type="text/javascript">
+var myJmol = 'myJmol';
+var JmolInfo = {
+    width:'100%',
+    height:'100%',
+    color:'#E2F4F5',
+    j2sPath:'../jsmol/j2s',
+    serverURL:'../jsmol/php/jsmol.php',
+    use:'html5'
+};
+// 从URL参数获取模型文件路径，如果没有则使用默认值
+var urlParams = new URLSearchParams(window.location.search);
+var modelFile = urlParams.get('model') || "/3d/a.cif";
+
+$(document).ready(function(){
+    $('#JmolDiv').html( Jmol.getAppletHtml(myJmol, JmolInfo) );
+    Jmol.script(myJmol, 'load ' + modelFile);
+});
+</script>
+</head>
+<body>
+<!-- 添加表格开始 -->
+<table>
+    <tr>
+        <td>
+            <!-- 原有div放入第一个td单元格 -->
+            <div id="JmolDiv" style="width:500px; height:400px;"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- 将spacefill控制部分放入第二个td单元格 -->
+            <script type="text/javascript">
+                Jmol.jmolRadioGroup(myJmol, [
+                    ["spacefill off",  "off"],
+                    ["spacefill 23%",  "23%", "checked"],
+                    ["spacefill 100%", "100%"]
+                ]);
+            </script>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <script type="text/javascript">
+                Jmol.jmolButton(myJmol, "reset", "Reset to original orientation");
+            </script>
+        </td>
+    </tr>
+    <tr>
+        <td>
+<a href="javascript:Jmol.script(myJmol, 'translate -2 0 0')">左移</a>
+<a href="javascript:Jmol.script(myJmol, 'translate 2 0 0')">右移</a>
+<a href="javascript:Jmol.script(myJmol, 'translate 0 2 0')">上移</a>
+<a href="javascript:Jmol.script(myJmol, 'translate 0 -2 0')">下移</a>
+    </td>
+    </tr>
+    <tr>
+        <td>
+<a href="javascript:Jmol.script(myJmol, 'zoom +20')">放大+</a>
+<a href="javascript:Jmol.script(myJmol, 'zoom -20')">放大+</a>
+    </td>
+    </tr>
+    <tr>
+        <td>
+<a class="control-btn" href="javascript:Jmol.script(myJmol, 'unitcell off; axes off')">去掉边框</a>
+<a class="control-btn" href="javascript:Jmol.script(myJmol, 'unitcell on;  axes on')">显示边框</a>
+    </td>
+    </tr>
+    <tr>
+        <td>
+<a href="javascript:Jmol.script(myJmol, 'move 360 0 0 0 0 0 0 0 2')">绕x轴旋转</a>
+<a href="javascript:Jmol.script(myJmol, 'move 0 360 0 0 0 0 0 0 2')">绕y轴旋转</a>
+<a href="javascript:Jmol.script(myJmol, 'move 0 0 360 0 0 0 0 0 2')">绕z轴旋转</a>
+    </td>
+    </tr>
+  <tr>
+    <td>
+      labels <a
+      href="javascript:Jmol.script(myJmol,'if (_fileType == &quot;Pdb&quot;){select *.CA;label %n%r}else{select *;label %a};select *;')">on</a>
+      <a href="javascript:Jmol.script(myJmol,'select *;labels off')">off</a>
+    </td>
+  </tr>
+<tr>
+<td>
+    <a href="javascript:Jmol.script(myJmol, 'load ' + modelFile + ' {1 1 1}')">单胞</a>
+</td>
+</tr>
+<tr>
+<td>超胞</td>
+</tr>
+<tr>
+<td>
+    a: <input type="number" id="a" value="1" size="2">
+    b: <input type="number" id="b" value="1" size="2">
+    c: <input type="number" id="c" value="1" size="2">
+    <button onclick="Jmol.script(myJmol, 'load ' + modelFile + ' {' + document.getElementById('a').value + ' ' + document.getElementById('b').value + ' ' + document.getElementById('c').value + '}')">创建</button>
+</td>
+</tr>
+<tr>
+<td>
+    <a href="javascript:Jmol.script(myJmol, 'menu')">菜单</a>
+</td>
+</tr>
+
+</table>
+<!-- 表格结束 -->
+</body>
+		
