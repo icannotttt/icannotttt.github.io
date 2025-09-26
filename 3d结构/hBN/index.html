@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>两个分子结构封装测试 | 欢迎来到我的小站</title>
+  <title>hBN结构 | 欢迎来到我的小站</title>
   <meta name="keywords" content="">
-  <meta name="description" content="两个分子结构封装测试 | 欢迎来到我的小站">
+  <meta name="description" content="hBN结构 | 欢迎来到我的小站">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="可可五笔 益智游戏 五子棋 		 			canvas { 				display: block; 				margin: 50px auto; 				box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9; 				cursor: pointer; 			} 			.btn-wrap { 				display: flex">
 <meta property="og:type" content="website">
@@ -94,7 +94,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(15)</small>
+                <small>(13)</small>
             
         </div>
     </li>
@@ -106,7 +106,7 @@
         <div data-rel="3d结构">
             
             3d结构
-            <small>(4)</small>
+            <small>(2)</small>
         </div>
         
     </li>
@@ -214,7 +214,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_posts_number" value="13">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -278,29 +278,11 @@
         
         
         <a  class="All 3d结构 "
-           href="/3d%E7%BB%93%E6%9E%84/charu/"
+           href="/3d%E7%BB%93%E6%9E%84/hBN/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="hBN结构">hBN结构</span>
             <span class="post-date" title="2025-09-26 16:55:20">2025/09/26</span>
-        </a>
-        
-        
-        <a  class="All 3d结构 "
-           href="/3d%E7%BB%93%E6%9E%84/3d%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="两个分子结构封装测试">两个分子结构封装测试</span>
-            <span class="post-date" title="2025-09-25 13:41:15">2025/09/25</span>
-        </a>
-        
-        
-        <a  class="All 3d结构 "
-           href="/3d%E7%BB%93%E6%9E%84/3d/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="封装测试">封装测试</span>
-            <span class="post-date" title="2025-09-25 12:37:46">2025/09/25</span>
         </a>
         
         
@@ -420,9 +402,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-3d - 副本" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-hBN" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">两个分子结构封装测试</h1>
+        <h1 class="article-title">hBN结构</h1>
     
     <div class="article-meta">
         
@@ -440,7 +422,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2025-09-25 13:44:30'>2025-09-25 13:41</time>
+            Created At : <time class="date" title='Updated At: 2025-09-26 20:31:33'>2025-09-26 16:55</time>
         
     </div>
     <div class="article-meta">
@@ -473,7 +455,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%AD%90%E7%BB%93%E6%9E%84%E5%B1%95%E7%A4%BA"><span class="toc-text">分子结构展示</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -489,26 +471,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="分子结构展示">分子结构展示</h2>
-
-## 分子对比
-
-<div id="viewer1" style="width: 50%; height: 500px;"></div>
-<div id="viewer2" style="width: 50%; height: 500px;"></div>
-
-<script src="/js/jsmol-helper.js"></script>
-<script>
-// 初始化第一个分子
-initJSmol('viewer1', '/3d/a.cif');
-
-// 初始化第二个分子（带自定义配置）
-initJSmol('viewer2', '/3d/b.cif', {
-    script: "spacefill 0.3; wireframe 0.05;",
-    onReady: function(applet) {
-        console.log('第二个分子加载完成');
-    }
-});
-</script>
+        <p>##两原子</p>
+<iframe src="/Jmol-16.3.33-binary/test/crystal-viewer.html?model=/3d/POSCAR_hBN_2.cif" width="200%" height="700px" style="border: 1px solid #ccc;"></iframe>
+<p>##四原子</p>
+<iframe src="/Jmol-16.3.33-binary/test/crystal-viewer.html?model=/3d/POSCAR_hBN_4.cif" width="200%" height="700px" style="border: 1px solid #ccc;"></iframe>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 gdby_mail@163.com </span>
