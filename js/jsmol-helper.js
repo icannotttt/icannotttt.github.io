@@ -1,4 +1,3 @@
-// JSmol 助手函数 - 封装自你可运行的代码
 function initJSmol(containerId, cifPath, options) {
     // 参数处理
     var appletName = (options && options.appletName) || containerId + '_app';
@@ -27,7 +26,7 @@ function initJSmol(containerId, cifPath, options) {
                 color: "0xFFFFFF",
                 addSelectionOptions: false,
                 use: "HTML5",
-                j2sPath: "/Jmol-16.3.33-binary/jmol-16.3.33/jsmol/jsmol/j2s",
+                j2sPath: "/Jmol-16.3.33-binary/jsmol/j2s",
                 script: fullScript,
                 readyFunction: function(applet) {
                     console.log('JSmol 应用准备就绪:', containerId);
@@ -56,7 +55,7 @@ function initJSmol(containerId, cifPath, options) {
     // 动态加载 JSmol
     if (!window.Jmol) {
         var script = document.createElement('script');
-        script.src = '/Jmol-16.3.33-binary/jmol-16.3.33/jsmol/jsmol/JSmol.min.js';
+        script.src = '/Jmol-16.3.33-binary/jsmol/JSmol.min.js';
         script.onload = function() {
             setTimeout(initFullJSmol, 1000);
         };
