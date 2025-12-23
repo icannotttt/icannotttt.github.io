@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>test</title>
+      <link href="/test/test/"/>
+      <url>/test/test/</url>
+      
+        <content type="html"><![CDATA[<p>hello world</p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> test </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/uncategorized/%E6%9F%A5%E7%9C%8B/"/>
       <url>/uncategorized/%E6%9F%A5%E7%9C%8B/</url>
