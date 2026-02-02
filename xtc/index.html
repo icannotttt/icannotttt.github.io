@@ -1,1370 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <title>Simple XTC Viewer</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-<style>
-  /* Global page */
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background-color: #f5f5f5;
-    color: #202124;
-    padding: 20px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  h3 {
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-
-  /* 核心：固定尺寸的章节目录面板 480x800 */
-  #chapterDirectory {
-    width: 480px;
-    height: 800px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    background-color: #fff;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* 防止内容溢出固定尺寸 */
-  }
-
-  /* 目录标题栏 */
-  .directory-header {
-    padding: 12px 16px;
-    font-weight: 600;
-    color: #0a66c2;
-    background-color: #e0f2ff;
-    border-bottom: 1px solid #eee;
-    flex-shrink: 0; /* 标题栏不收缩 */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  /* 章节列表区域 - 填满剩余高度 */
-  .directory-list {
-    width: 100%;
-    height: calc(100% - 46px); /* 减去标题栏高度 */
-    overflow-y: auto; /* 超出高度滚动 */
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  /* 章节项样式 */
-  .chapter-item {
-    padding: 10px 16px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-    transition: background 0.2s;
-  }
-
-  .chapter-item:last-child {
-    border-bottom: none;
-  }
-
-  .chapter-item:hover {
-    background-color: #f0f0f0;
-  }
-
-  .chapter-item.active {
-    background-color: #e0f2ff;
-    font-weight: 600;
-    color: #0a66c2;
-  }
-
-  /* 书本显示区域 */
-  canvas {
-    display: block;
-    max-width: 480px; /* 和章节目录宽度一致 */
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    image-rendering: pixelated;
-    background-color: #fff;
-    margin-bottom: 20px;
-  }
-
-  /* 控制区域样式 */
-  .row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  #pageControls, #zoomDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  input[type="range"] {
-    width: 320px;
-    height: 4px;
-    border-radius: 2px;
-    background-color: #ddd;
-    cursor: pointer;
-  }
-
-  input[type="number"] {
-    width: 70px;
-  }
-
-  #pageInfo, #imageInfo, #metaData {
-    font-size: 0.95rem;
-    color: #555;
-    text-align: center;
-    margin: 5px 0;
-  }
-
-  button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    background-color: #0a66c2;
-    color: white;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  button:hover {
-    background-color: #0854a0;
-  }
-
-  .footer {
-    font-size: 0.6rem;
-    margin-top: 20px;
-  }
-
-  /* 按钮样式 */
-  #exportChapterBtn {
-    padding: 4px 8px;
-    font-size: 12px;
-    background-color: #28a745;
-  }
-
-  #exportChapterBtn:hover {
-    background-color: #218838;
-  }
-
-  #mergeBtn {
-    padding: 4px 8px;
-    font-size: 12px;
-    background-color: #ffc107;
-    color: #202124;
-    margin-left: 8px;
-  }
-
-  #mergeBtn:hover {
-    background-color: #e0a800;
-  }
-
-  /* 目录分页控制 */
-  .directory-pagination {
-    padding: 8px 16px;
-    background-color: #f8f9fa;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-  }
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PNG / txtpng 预览与转换工具</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    h1 { text-align: center; }
+    .upload-area {
+      border: 2px dashed #4CAF50;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+      background: #f0fff0;
+    }
+    .preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .preview-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 480px;
+      background: white;
+    }
+    canvas.preview {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      width: 100%;
+      height: auto;
+      background: white;
+    }
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .file-type {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <h3>Simple XTC Viewer (With Chapter Directory Merge)</h3>
 
-  <!-- 文件选择 -->
-  <div class="row">
-    <input id="fileInput" type="file" accept=".xtc, .xtg, .xth, .xtch" />
-  </div>
+<h1>PNG / txtpng 预览与转换工具</h1>
 
-  <!-- 控制区域 -->
-  <div id="pageControls">
-    <div class="row">
-      <button id="prevBtn">◀ Prev</button>
-      <button id="nextBtn">Next ▶</button>
-      <span id="pageInfo">-</span>
-    </div>
-    <div class="row">
-      <input id="frameRange" type="range" min="0" max="0" value="0" />
-    </div>
-  </div>
+<div class="upload-area">
+  <p>上传 PNG 图片（转为 txtpng）或 txtpng 文本文件（直接预览）</p>
+  <input type="file" id="fileInput" accept=".png,.txtpng" multiple />
+</div>
 
-  <div id="zoomDiv" class="row">
-    <label>
-      Zoom: <input id="zoomInput" type="number" value="100" min="10" max="800" step="10"/> %
-    </label>
-    <span id="imageInfo">-</span>
-  </div>
-
-  <!-- 核心：480x800 固定尺寸的章节目录面板 -->
-  <div id="chapterDirectory" style="display: none;">
-    <div class="directory-header">
-      <span>Chapters Directory (480×800)</span>
-      <div>
-        <button id="exportChapterBtn">Export Directory</button>
-        <button id="mergeBtn">Merge to Book</button>
-      </div>
-    </div>
-    <ul id="chapterList" class="directory-list"></ul>
-    <div class="directory-pagination">
-      <button id="dirPrevBtn" style="padding: 2px 6px; font-size: 10px;">◀</button>
-      <span id="dirPageInfo">Page 1 / 1</span>
-      <button id="dirNextBtn" style="padding: 2px 6px; font-size: 10px;">▶</button>
-    </div>
-  </div>
-
-  <!-- 书本显示区域 -->
-  <canvas id="canvas"></canvas>
-  <!-- 临时画布（用于生成XTC） -->
-  <canvas id="tempCanvas" style="display: none;"></canvas>
-
-  <div id="metaData"></div>
-  <div class="footer">Open-source. Contribute <a href="https://github.com/SimoGecko/XtcViewer/">here</a>.</div>
+<div class="preview-container" id="previewContainer"></div>
 
 <script>
-(() => {
-  // 核心常量：固定目录尺寸
-  const CHAPTER_DIR_WIDTH = 480;
-  const CHAPTER_DIR_HEIGHT = 800;
-  const CHAPTERS_PER_PAGE = 9; // 每页显示10个章节
-  const MAX_CHAR_PER_LINE = 18; // 每行最大字符数
-  // XTC格式常量
-  const MARK = { XTC: 0x00435458, XTCH: 0x48435458, XTG: 0x00475458, XTH: 0x00485458 };
-  const LE = true; // little endian
+// =============== 工具函数 ===============
 
-  // 全局变量 - 保存原始书籍数据
-  let originalBookBuffer = null;
-  let mergedBook = null;
-
-  // 工具函数
-  function LOG(obj) { console.log(obj); }
-  function WARN(obj) { console.warn(obj); }
-  function ERROR(obj) { throw new Error(obj); }
-
-  const TEXT_DEC = new TextDecoder('utf-8');
-  const TEXT_ENC = new TextEncoder('utf-8');
-
-  // 文本换行工具函数
-function wrapText(text, maxLength) {
-  // 如果文本长度小于等于最大长度，直接返回
-  if (text.length <= maxLength) return [text];
-  
-  const lines = [];
-  let currentLine = '';
-  
-  // 逐字符处理，严格按字符数换行
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    
-    // 如果当前行字符数已达上限，先换行
-    if (currentLine.length === maxLength) {
-      lines.push(currentLine);
-      currentLine = '';
-    }
-    
-    // 优先在空格处换行（优化体验，避免截断单词）
-    // 当剩余字符不足1个且下一个字符是空格时，提前换行
-    if (currentLine.length === maxLength - 1 && char === ' ') {
-      lines.push(currentLine);
-      currentLine = '';
-    } else {
-      currentLine += char;
-    }
-  }
-  
-  // 把最后一行加入
-  if (currentLine) lines.push(currentLine);
-  return lines;
+function rgbToGray255(r, g, b) {
+  return Math.round(255 - (0.299 * r + 0.587 * g + 0.114 * b));
 }
 
-  // ====================== XTC/XTG 生成器 & 合并器 ======================
-  class XTGH_Writer {
-    /**
-     * 将画布图像转换为XTG（1bit）格式
-     * @param {HTMLCanvasElement} canvas 源画布
-     * @returns {ArrayBuffer} XTG格式数据
-     */
-    static canvasToXTG(canvas) {
-      const ctx = canvas.getContext('2d');
-      const width = canvas.width;
-      const height = canvas.height;
-      
-      // 获取画布像素数据
-      const imageData = ctx.getImageData(0, 0, width, height);
-      const data = imageData.data;
-      
-      // 计算1bit数据大小（每行按8bit对齐）
-      const rowBytes = Math.ceil(width / 8);
-      const dataSize = rowBytes * height;
-      const xtgSize = 22 + dataSize; // 头部22字节 + 数据
-      
-      // 创建XTG缓冲区
-      const buffer = new ArrayBuffer(xtgSize);
-      const dv = new DataView(buffer);
-      
-      // 写入XTG头部
-      dv.setUint32(0, MARK.XTG, LE);          // 标识 XTG\0
-      dv.setUint16(4, width, LE);             // 宽度
-      dv.setUint16(6, height, LE);            // 高度
-      dv.setUint8(8, 0);                      // 颜色模式（0=1bit）
-      dv.setUint8(9, 0);                      // 压缩模式（0=无压缩）
-      dv.setUint32(10, dataSize, LE);         // 数据大小
-      // 14-21字节为MD5（暂填0）
-      for (let i = 14; i < 22; i++) dv.setUint8(i, 0);
-      
-      // 转换像素为1bit数据（黑白）
-      const xtgData = new Uint8Array(buffer, 22, dataSize);
-      let byteIndex = 0;
-      let bitIndex = 7; // MSB first
-      
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          const pixelIndex = (y * width + x) * 4;
-          const r = data[pixelIndex];
-          const g = data[pixelIndex + 1];
-          const b = data[pixelIndex + 2];
-          // 转灰度并二值化（>128为白，否则为黑）
-          const gray = (r + g + b) / 3;
-          const bit = gray > 128 ? 1 : 0;
-          
-          // 写入bit
-          if (bit) {
-            xtgData[byteIndex] |= (1 << bitIndex);
-          } else {
-            xtgData[byteIndex] &= ~(1 << bitIndex);
-          }
-          
-          bitIndex--;
-          // 满8bit切换下一个字节
-          if (bitIndex < 0) {
-            byteIndex++;
-            bitIndex = 7;
-          }
-        }
-        // 行结束，对齐到8bit
-        if (bitIndex !== 7) {
-          byteIndex++;
-          bitIndex = 7;
-        }
-      }
-      
-      return buffer;
-    }
-  }
+// 渲染 txtpng 数据到 Canvas
+function renderTxtpngToCanvas(txtpngText, canvas) {
+  const ctx = canvas.getContext("2d");
+  const imageData = ctx.createImageData(480, 800);
+  const data = imageData.data;
 
-  class XTC_Writer {
-    /**
-     * 将多个XTG图像封装为多页XTC文件
-     * @param {Array<ArrayBuffer>} xtgBuffers XTG图像数据数组
-     * @param {Object} metadata 元数据（标题、作者等）
-     * @returns {ArrayBuffer} XTC格式数据
-     */
-    static multiXTGToXTC(xtgBuffers, metadata = {}) {
-      const pageCount = xtgBuffers.length;
-      if (pageCount === 0) throw new Error('No XTG buffers provided');
-      
-      // 解析第一个XTG获取图像尺寸
-      const firstXtgDv = new DataView(xtgBuffers[0]);
-      const imgWidth = firstXtgDv.getUint16(4, LE);
-      const imgHeight = firstXtgDv.getUint16(6, LE);
-      
-      // 计算各部分大小
-      const headerSize = 56;          // XTC头部
-      const metadataSize = 256;       // 元数据区
-      const indexTableSize = 16 * pageCount; // 索引表（每页16字节）
-      const xtgTotalSize = xtgBuffers.reduce((sum, buf) => sum + buf.byteLength, 0);
-      
-      // 计算数据偏移
-      const dataOffset = headerSize + metadataSize + indexTableSize;
-      const xtcTotalSize = dataOffset + xtgTotalSize;
-      
-      // 创建XTC缓冲区
-      const buffer = new ArrayBuffer(xtcTotalSize);
-      const dv = new DataView(buffer);
-      
-      // 1. 写入XTC头部
-      dv.setUint32(0, MARK.XTC, LE);           // 标识 XTC\0
-      dv.setUint16(4, 0x0100, LE);             // 版本 1.0
-      dv.setUint16(6, pageCount, LE);          // 页数
-      dv.setUint8(8, 0);                       // 阅读方向（L->R）
-      dv.setUint8(9, 1);                       // 有元数据
-      dv.setUint8(10, 0);                      // 无缩略图
-      dv.setUint8(11, 1);                      // 有章节
-      dv.setUint32(12, 0, LE);                 // 当前页
-      dv.setBigUint64(16, BigInt(headerSize), LE); // 元数据偏移
-      dv.setBigUint64(24, BigInt(headerSize + metadataSize), LE); // 索引表偏移
-      dv.setBigUint64(32, BigInt(dataOffset), LE); // 数据偏移
-      dv.setBigUint64(40, 0n, LE);             // 缩略图偏移（0）
-      dv.setBigUint64(48, 0n, LE);             // 章节偏移（后续更新）
-      
-      // 2. 写入元数据（256字节）
-      const metaOffset = headerSize;
-      // 标题（128字节）
-      const titleBytes = TEXT_ENC.encode(metadata.title || "Chapter Directory");
-      for (let i = 0; i < Math.min(titleBytes.length, 127); i++) {
-        dv.setUint8(metaOffset + i, titleBytes[i]);
-      }
-      dv.setUint8(metaOffset + 127, 0); // 字符串结束符
-      
-      // 作者（64字节）
-      const authorBytes = TEXT_ENC.encode(metadata.author || "XtcViewer");
-      for (let i = 0; i < Math.min(authorBytes.length, 63); i++) {
-        dv.setUint8(metaOffset + 128 + i, authorBytes[i]);
-      }
-      dv.setUint8(metaOffset + 191, 0);
-      
-      // 出版商（32字节）
-      const publisherBytes = TEXT_ENC.encode(metadata.publisher || "");
-      for (let i = 0; i < Math.min(publisherBytes.length, 31); i++) {
-        dv.setUint8(metaOffset + 192 + i, publisherBytes[i]);
-      }
-      dv.setUint8(metaOffset + 223, 0);
-      
-      // 语言（16字节）
-      const langBytes = TEXT_ENC.encode(metadata.language || "en");
-      for (let i = 0; i < Math.min(langBytes.length, 10); i++) {
-        dv.setUint8(metaOffset + 224 + i, langBytes[i]);
-      }
-      dv.setUint8(metaOffset + 239, 0);
-      
-      // 创建时间（4字节，Unix时间戳）
-      dv.setUint32(metaOffset + 240, Math.floor(Date.now() / 1000), LE);
-      dv.setUint16(metaOffset + 244, 0xFFFF, LE); // 封面页（无）
-      dv.setUint16(metaOffset + 246, metadata.chapterCount || 0, LE); // 章节数
-      dv.setBigUint64(metaOffset + 248, 0n, LE);  // 保留
-      
-      // 3. 写入索引表（每页16字节）
-      const indexOffset = headerSize + metadataSize;
-      let currentDataOffset = dataOffset;
-      
-      for (let i = 0; i < pageCount; i++) {
-        const xtgBuffer = xtgBuffers[i];
-        const xtgDv = new DataView(xtgBuffer);
-        const xtgWidth = xtgDv.getUint16(4, LE);
-        const xtgHeight = xtgDv.getUint16(6, LE);
-        
-        // 写入当前页索引
-        const pageIndexOffset = indexOffset + (i * 16);
-        dv.setBigUint64(pageIndexOffset, BigInt(currentDataOffset), LE); // 图像偏移
-        dv.setUint32(pageIndexOffset + 8, xtgBuffer.byteLength, LE);    // 图像大小
-        dv.setUint16(pageIndexOffset + 12, xtgWidth, LE);               // 宽度
-        dv.setUint16(pageIndexOffset + 14, xtgHeight, LE);              // 高度
-        
-        // 更新数据偏移
-        currentDataOffset += xtgBuffer.byteLength;
-      }
-      
-      // 4. 写入所有XTG图像数据
-      const xtcDataView = new Uint8Array(buffer, dataOffset);
-      let byteOffset = 0;
-      
-      for (const xtgBuffer of xtgBuffers) {
-        const xtgView = new Uint8Array(xtgBuffer);
-        xtcDataView.set(xtgView, byteOffset);
-        byteOffset += xtgBuffer.byteLength;
-      }
-      
-      LOG(`Directory XTC generated - Pages: ${pageCount}, Size: ${buffer.byteLength} bytes`);
-      return buffer;
-    }
+  let i = 0;
+  const lines = txtpngText.trim().split("\n");
 
-    /**
-     * 将章节目录转换为多页XTC文件
-     * @param {Array<Object>} chapters 章节数组
-     * @param {Object} metadata 元数据
-     * @returns {ArrayBuffer} XTC格式数据
-     */
-    static chaptersToMultiPageXTC(chapters, metadata = {}) {
-      const tempCanvas = document.getElementById('tempCanvas');
-      tempCanvas.width = CHAPTER_DIR_WIDTH;
-      tempCanvas.height = CHAPTER_DIR_HEIGHT;
-      const ctx = tempCanvas.getContext('2d');
-      
-      // 计算总页数
-      const totalPages = Math.ceil(chapters.length / CHAPTERS_PER_PAGE);
-      const xtgBuffers = [];
-      
-      // 为每一页生成XTG图像
-      for (let pageNum = 0; pageNum < totalPages; pageNum++) {
-        // 清空画布
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-        
-        // 绘制标题栏
-        ctx.fillStyle = '#e0f2ff';
-        ctx.fillRect(0, 0, tempCanvas.width, 46);
-        ctx.fillStyle = '#0a66c2';
-        ctx.font = '16px system-ui bold';
-        ctx.fillText(`Chapters Directory (${pageNum+1}/${totalPages})`, 16, 30);
-        
-        // 计算当前页显示的章节范围
-        const startIdx = pageNum * CHAPTERS_PER_PAGE;
-        const endIdx = Math.min(startIdx + CHAPTERS_PER_PAGE, chapters.length);
-        const currentChapters = chapters.slice(startIdx, endIdx);
-        
-        // 绘制章节列表
-        ctx.fillStyle = '#202124';
-        ctx.font = '14px system-ui';
-        
-        let y = 60; // 标题栏下方开始
-        const baseLineHeight = 70; // 基础行高
-        const lineSpacing = 5; // 行间距
-        
-        currentChapters.forEach((ch, idx) => {
-          if (y > tempCanvas.height - 40) return; // 超出高度停止
-          
-          // 绘制章节背景
-          ctx.fillStyle = '#ffffff';
-          
-          // 处理章节名称换行
-          const chapterName = ch.chapterName || `Chapter ${startIdx + idx + 1}`;
-          const nameLines = wrapText(chapterName, MAX_CHAR_PER_LINE);
-          const subText = `Pages ${ch.startPage + totalPages} - ${ch.endPage + totalPages}`; // 页码偏移（目录页数）
-          
-          // 计算实际行高（根据换行数量调整）
-          const lineHeight = baseLineHeight + ((nameLines.length - 1) * 25); // 每个换行增加25px高度
-          
-          // 绘制背景
-          ctx.fillRect(0, y - 8, tempCanvas.width, lineHeight);
-          
-          // 绘制章节文本（支持换行）
-          ctx.fillStyle = '#202124';
-          ctx.font = 'bold 26px system-ui';
-          
-          let lineY = y;
-          // 绘制章节名称的每一行
-          nameLines.forEach((line, lineIdx) => {
-            ctx.fillText(line, 20, lineY);
-            lineY += 28 + lineSpacing; // 每行间距
-          });
-          
-          // 绘制副标题（页码范围）
-          ctx.font = 'bold 26px system-ui';
-          ctx.fillStyle = '#666';
-          ctx.fillText(subText, 20, lineY);
-          
-          // 绘制分隔线
-          ctx.strokeStyle = '#eee';
-          ctx.beginPath();
-          ctx.moveTo(0, y + lineHeight - 2);
-          ctx.lineTo(tempCanvas.width, y + lineHeight - 2);
-          ctx.stroke();
-          
-          // 更新y坐标
-          y += lineHeight;
-        });
-        
-        // 绘制分页信息
-        ctx.fillStyle = '#666';
-        ctx.font = 'bold 14px system-ui';
-        ctx.textAlign = 'center';
-        ctx.fillText(`Page ${pageNum+1} of ${totalPages} | Total Chapters: ${chapters.length}`, 
-                     tempCanvas.width / 2, tempCanvas.height - 20);
-        ctx.textAlign = 'left';
-        
-        // 转换为XTG并保存
-        const xtgBuffer = XTGH_Writer.canvasToXTG(tempCanvas);
-        xtgBuffers.push(xtgBuffer);
-      }
-      
-      // 更新元数据（章节数）
-      metadata.chapterCount = chapters.length;
-      
-      // 封装为多页XTC
-      return this.multiXTGToXTC(xtgBuffers, metadata);
-    }
+  // 容错：最多处理 800 行
+  for (let y = 0; y < 800; y++) {
+    const line = lines[y] || "";
+    const values = line.trim() ? line.trim().split(/\s+/).map(Number) : [];
+    
+    for (let x = 0; x < 480; x++) {
+      const val = (x < values.length) ? values[x] : -1;
 
-    /**
-     * 合并章节目录XTC和原书籍XTC
-     * @param {ArrayBuffer} dirBuffer 章节目录XTC缓冲区
-     * @param {ArrayBuffer} bookBuffer 原书籍XTC缓冲区
-     * @returns {ArrayBuffer} 合并后的XTC缓冲区
-     */
-    static mergeDirectoryAndBook(dirBuffer, bookBuffer) {
-      // 解析目录XTC
-      const dirDv = new DataView(dirBuffer);
-      const dirPageCount = dirDv.getUint16(6, LE); // 目录页数
-      
-      // 解析原书籍XTC
-      const bookDv = new DataView(bookBuffer);
-      const bookPageCount = bookDv.getUint16(6, LE); // 原书籍页数
-      const bookHasMetadata = bookDv.getUint8(9, LE); // 是否有元数据
-      const bookHasChapters = bookDv.getUint8(11, LE); // 是否有章节
-      
-      LOG(`Merging directory (${dirPageCount} pages) with book (${bookPageCount} pages)`);
-      
-      // 1. 提取目录的XTG数据
-      const dirIndexOffset = Number(dirDv.getBigUint64(24, LE));
-      const dirDataOffset = Number(dirDv.getBigUint64(32, LE));
-      const dirXtgBuffers = [];
-      
-      // 读取目录的所有XTG数据
-      for (let i = 0; i < dirPageCount; i++) {
-        const pageIndexOffset = dirIndexOffset + (i * 16);
-        const xtgOffset = Number(dirDv.getBigUint64(pageIndexOffset, LE));
-        const xtgSize = dirDv.getUint32(pageIndexOffset + 8, LE);
-        const xtgBuffer = dirBuffer.slice(xtgOffset, xtgOffset + xtgSize);
-        dirXtgBuffers.push(xtgBuffer);
-      }
-      
-      // 2. 提取原书籍的XTG数据
-      const bookIndexOffset = Number(bookDv.getBigUint64(24, LE));
-      const bookDataOffset = Number(bookDv.getBigUint64(32, LE));
-      const bookXtgBuffers = [];
-      
-      // 读取原书籍的所有XTG数据
-      for (let i = 0; i < bookPageCount; i++) {
-        const pageIndexOffset = bookIndexOffset + (i * 16);
-        const xtgOffset = Number(bookDv.getBigUint64(pageIndexOffset, LE));
-        const xtgSize = bookDv.getUint32(pageIndexOffset + 8, LE);
-        const xtgBuffer = bookBuffer.slice(xtgOffset, xtgOffset + xtgSize);
-        bookXtgBuffers.push(xtgBuffer);
-      }
-      
-      // 3. 合并XTG数据（目录在前，书籍在后）
-      const mergedXtgBuffers = [...dirXtgBuffers, ...bookXtgBuffers];
-      const mergedPageCount = mergedXtgBuffers.length;
-      
-      // 4. 计算合并后XTC的大小
-      const headerSize = 56;
-      const metadataSize = bookHasMetadata ? 256 : 0;
-      const indexTableSize = 16 * mergedPageCount;
-      const xtgTotalSize = mergedXtgBuffers.reduce((sum, buf) => sum + buf.byteLength, 0);
-      
-      // 章节数据大小（如果有）
-      let chapterDataSize = 0;
-      let bookChapterCount = 0;
-      if (bookHasChapters && bookHasMetadata) {
-        bookChapterCount = bookDv.getUint16(bookDv.getUint32(16, LE) + 246, LE);
-        chapterDataSize = bookChapterCount * 96; // 每个章节96字节
-      }
-      
-      // 计算最终偏移
-      const metadataOffset = headerSize;
-      const indexTableOffset = metadataOffset + metadataSize;
-      const chapterDataOffset = indexTableOffset + indexTableSize;
-      const dataOffset = chapterDataOffset + chapterDataSize;
-      const mergedTotalSize = dataOffset + xtgTotalSize;
-      
-      // 5. 创建合并后的XTC缓冲区
-      const mergedBuffer = new ArrayBuffer(mergedTotalSize);
-      const mergedDv = new DataView(mergedBuffer);
-      const mergedUint8 = new Uint8Array(mergedBuffer);
-      
-      // 6. 写入合并后的头部
-      mergedDv.setUint32(0, MARK.XTC, LE); // 标识
-      mergedDv.setUint16(4, 0x0100, LE);  // 版本
-      mergedDv.setUint16(6, mergedPageCount, LE); // 总页数
-      mergedDv.setUint8(8, bookDv.getUint8(8, LE)); // 阅读方向
-      mergedDv.setUint8(9, bookHasMetadata ? 1 : 0); // 保留元数据
-      mergedDv.setUint8(10, bookDv.getUint8(10, LE)); // 缩略图
-      mergedDv.setUint8(11, bookHasChapters ? 1 : 0); // 保留章节
-      mergedDv.setUint32(12, 0, LE); // 当前页（目录第一页）
-      
-      // 偏移设置
-      mergedDv.setBigUint64(16, BigInt(metadataOffset), LE); // 元数据偏移
-      mergedDv.setBigUint64(24, BigInt(indexTableOffset), LE); // 索引表偏移
-      mergedDv.setBigUint64(32, BigInt(dataOffset), LE); // 数据偏移
-      mergedDv.setBigUint64(40, bookDv.getBigUint64(40, LE), LE); // 缩略图偏移
-      mergedDv.setBigUint64(48, bookHasChapters ? BigInt(chapterDataOffset) : 0n, LE); // 章节偏移
-      
-      // 7. 复制原书籍的元数据（更新章节页码）
-      if (bookHasMetadata) {
-        const bookMetadataOffset = Number(bookDv.getBigUint64(16, LE));
-        const bookMetadata = new Uint8Array(bookBuffer, bookMetadataOffset, 256);
-        mergedUint8.set(bookMetadata, metadataOffset);
-        
-        // 如果有章节，更新章节的起始/结束页码（加上目录页数）
-        if (bookHasChapters) {
-          mergedDv.setUint16(metadataOffset + 246, bookChapterCount, LE); // 保留章节数
-          
-          // 复制并更新章节数据
-          const bookChapterOffset = Number(bookDv.getBigUint64(48, LE));
-          for (let i = 0; i < bookChapterCount; i++) {
-            const srcOffset = bookChapterOffset + (i * 96);
-            const dstOffset = chapterDataOffset + (i * 96);
-            
-            // 检查偏移是否越界
-            if (srcOffset + 96 > bookBuffer.byteLength) {
-              WARN(`Chapter ${i} data out of bounds, skipping`);
-              continue;
-            }
-            
-            // 复制章节数据
-            const chapterData = new Uint8Array(bookBuffer, srcOffset, 96);
-            mergedUint8.set(chapterData, dstOffset);
-            
-            // 更新页码
-            const startPage = bookDv.getUint16(srcOffset + 0x50, LE);
-            const endPage = bookDv.getUint16(srcOffset + 0x52, LE);
-            mergedDv.setUint16(dstOffset + 0x50, startPage + dirPageCount, LE);
-            mergedDv.setUint16(dstOffset + 0x52, endPage + dirPageCount, LE);
-          }
-        }
-      }
-      
-      // 8. 写入合并后的索引表
-      let currentDataOffset = dataOffset;
-      for (let i = 0; i < mergedPageCount; i++) {
-        const xtgBuffer = mergedXtgBuffers[i];
-        const xtgDv = new DataView(xtgBuffer);
-        const xtgWidth = xtgDv.getUint16(4, LE);
-        const xtgHeight = xtgDv.getUint16(6, LE);
-        
-        const pageIndexOffset = indexTableOffset + (i * 16);
-        mergedDv.setBigUint64(pageIndexOffset, BigInt(currentDataOffset), LE);
-        mergedDv.setUint32(pageIndexOffset + 8, xtgBuffer.byteLength, LE);
-        mergedDv.setUint16(pageIndexOffset + 12, xtgWidth, LE);
-        mergedDv.setUint16(pageIndexOffset + 14, xtgHeight, LE);
-        
-        currentDataOffset += xtgBuffer.byteLength;
-      }
-      
-      // 9. 写入合并后的XTG数据
-      let byteOffset = dataOffset;
-      for (const xtgBuffer of mergedXtgBuffers) {
-        // 边界保护
-        if (byteOffset + xtgBuffer.byteLength > mergedBuffer.byteLength) {
-          throw new Error(`XTG data overflow at page ${mergedXtgBuffers.indexOf(xtgBuffer)}`);
-        }
-        const xtgView = new Uint8Array(xtgBuffer);
-        mergedUint8.set(xtgView, byteOffset);
-        byteOffset += xtgBuffer.byteLength;
-      }
-      
-      LOG(`Merged XTC created - Total pages: ${mergedPageCount}, Size: ${mergedBuffer.byteLength} bytes`);
-      return mergedBuffer;
-    }
-  }
-
-  // ====================== 原有解析逻辑 ======================
-  // XTG/XTH 图片解析类
-  class XTGH_Image {
-    constructor(arrayBuffer) {
-      this.buf = arrayBuffer;
-      this.dv = new DataView(arrayBuffer);
-      this.header = null;
-      this.parseHeader();
-    }
-
-    parseHeader() {
-      let dv = this.dv;
-      if (dv.byteLength < 22) throw new Error('File too small to be XTG/XTH');
-      this.header = {
-        mark:        dv.getUint32(0,LE),
-        width:       dv.getUint16(4,LE),
-        height:      dv.getUint16(6,LE),
-        colorMode:   dv.getUint8 (8),
-        compression: dv.getUint8 (9),
-        dataSize:    dv.getUint32(10,LE),
-      };
-      if (this.header.mark !== MARK.XTG && this.header.mark !== MARK.XTH) throw new Error('Not an XTG/XTH Image');
-      if (this.header.colorMode !== 0) throw new Error('Unsupported colorMode (only monochrome)');
-      if (this.header.compression !== 0) throw new Error('Unsupported compression');
-    }
-
-    getImageData() {
-      let dv = this.dv;
-      let w = this.header.width;
-      let h = this.header.height;
-
-      const imgDataOffset = 22;
-      const rowBytes = Math.floor((w + 7) / 8);
-      const raw = new Uint8Array(this.buf, imgDataOffset, this.header.dataSize);
-      const rgba = new Uint8ClampedArray(w * h * 4);
-
-      if (this.header.mark === MARK.XTG) {
-        // 1bpp 转 RGBA
-        for (let y = 0; y < h; y++) {
-          const rowStart = y * rowBytes;
-          for (let x = 0; x < w; x++) {
-            const byte = raw[rowStart + (x >> 3)];
-            const bit = (byte >> (7 - (x & 7))) & 1;
-            const v = bit ? 255 : 0;
-            const idx = (y * w + x) * 4;
-            rgba[idx] = rgba[idx+1] = rgba[idx+2] = v;
-            rgba[idx+3] = 255;
-          }
-        }
-      } else if (this.header.mark === MARK.XTH) {
-        // 2bpp 转 RGBA
-        const planeSize = Math.ceil((w * h) / 8);
-        const plane1 = raw.subarray(0, planeSize);
-        const plane2 = raw.subarray(planeSize, planeSize*2);
-
-        for (let x = 0; x < w; x++) {
-          const col = w - 1 - x;
-          for (let y = 0; y < h; y++) {
-            const byteIndex = (y >> 3) + col * Math.ceil(h / 8);
-            const bitIndex = y & 7;
-            const bit1 = (plane1[byteIndex] >> (7 - bitIndex)) & 1;
-            const bit2 = (plane2[byteIndex] >> (7 - bitIndex)) & 1;
-            let pixelValue = (bit1 << 1) | bit2;
-            
-            let v;
-            switch (pixelValue) {
-              case 0: v = 255; break;
-              case 1: v = 85; break;
-              case 2: v = 170; break;
-              case 3: v = 0; break;
-            }
-
-            const idx = (y * w + x) * 4;
-            rgba[idx] = rgba[idx+1] = rgba[idx+2] = v;
-            rgba[idx+3] = 255;
-          }
-        }
-      }
-
-      return { width: w, height: h, imageData: rgba };
-    }
-  }
-
-  // XTC/XTCH 文件解析类
-  class XTC_File {
-    constructor(arrayBuffer) {
-      this.buf = arrayBuffer;
-      this.dv = new DataView(arrayBuffer);
-      this.header = null;
-      this.metadata = null;
-      this.chapters = [];
-      this.indexTable = [];
-
-      this.parseHeader();
-      this.parseMetadata();
-      this.parseChapters();
-      this.parseIndexTable();
-    }
-
-    parseHeader() {
-      let dv = this.dv;
-      if (dv.byteLength < 56) throw new Error('File too small to be XTC/XTCH');
-      this.header = {
-        mark:           dv.getUint32(0,LE),
-        version:        dv.getUint16(4,LE),
-        pageCount:      dv.getUint16(6,LE),
-        readDirection:  dv.getUint8(8),
-        hasMetadata:    !!dv.getUint8(9),
-        hasThumbnails:  !!dv.getUint8(10),
-        hasChapters:    !!dv.getUint8(11),
-        currentPage:    dv.getUint32(12,LE),
-        metadataOffset: Number(dv.getBigUint64(16,LE)),
-        indexOffset:    Number(dv.getBigUint64(24,LE)),
-        dataOffset:     Number(dv.getBigUint64(32,LE)),
-        thumbOffset:    Number(dv.getBigUint64(40,LE)),
-        chapterOffset:  Number(dv.getBigUint64(48,LE)),
-      };
-      if (this.header.mark !== MARK.XTC && this.header.mark != MARK.XTCH) throw new Error('Not an XTC/XTCH file');
-      if (this.header.version !== 0x0100) WARN("Expected version v1.0 (0x100), got " + this.header.version);
-      if (this.header.pageCount <= 0) throw new Error('pageCount is <= 0');
-    }
-
-    parseMetadata() {
-      if (!this.header.hasMetadata) return;
-      const offset = this.header.metadataOffset;
-      if (!offset || offset + 256 > this.dv.byteLength) throw new Error('Bad metadata offset');
-      const bytes = new Uint8Array(this.buf, offset, 256);
-      this.metadata = {
-        title:        TEXT_DEC.decode(bytes.subarray(  0,128)).split('\0')[0] || '',
-        author:       TEXT_DEC.decode(bytes.subarray(128,192)).split('\0')[0] || '',
-        publisher:    TEXT_DEC.decode(bytes.subarray(192,224)).split('\0')[0] || '',
-        language:     TEXT_DEC.decode(bytes.subarray(224,240)).split('\0')[0] || '',
-        createTime:   this.dv.getUint32(offset+240,LE),
-        coverPage:    this.dv.getUint16(offset+244,LE),
-        chapterCount: this.dv.getUint16(offset+246,LE),
-      };
-    }
-
-    parseChapters() {
-      if (!this.header.hasChapters) return;
-      const count = this.metadata?.chapterCount || 0;
-      let offset = this.header.chapterOffset;
-      if (offset > this.dv.byteLength) return;
-      
-      for (let i=0; i<count; i++) {
-        if (offset + 96 > this.dv.byteLength) throw new Error('Chapter offset out of range');
-        const nameBytes = new Uint8Array(this.buf, offset, 80);
-        this.chapters.push({
-          chapterName: TEXT_DEC.decode(nameBytes).split('\0')[0] || `Chapter ${i+1}`,
-          startPage:   this.dv.getUint16(offset+0x50,LE),
-          endPage:     this.dv.getUint16(offset+0x52,LE),
-        });
-        offset += 96;
-      }
-    }
-
-    parseIndexTable() {
-      const count = this.header.pageCount;
-      let offset = this.header.indexOffset;
-      for (let i=0; i<count; i++){
-        if (offset + 16 > this.dv.byteLength) throw new Error('Index table offset out of range');
-        this.indexTable.push({
-          offset: Number(this.dv.getBigUint64(offset,LE)),
-          size:   this.dv.getUint32(offset+8,LE),
-          width:  this.dv.getUint16(offset+12,LE),
-          height: this.dv.getUint16(offset+14,LE),
-        });
-        offset += 16;
-      }
-    }
-
-    getPageImage(pageIndex) {
-      if (pageIndex < 0 || pageIndex >= this.indexTable.length) return null;
-      const entry = this.indexTable[pageIndex];
-      const slice = this.buf.slice(entry.offset, entry.offset + entry.size);
-      return new XTGH_Image(slice);
-    }
-
-    // 根据页码获取当前章节
-    getCurrentChapter(pageNum) {
-      return this.chapters.find(ch => pageNum >= ch.startPage && pageNum <= ch.endPage);
-    }
-  }
-
-  // ====================== DOM 操作 ======================
-  // DOM 元素
-  const fileInput    = document.getElementById('fileInput');
-  const canvas       = document.getElementById('canvas');
-  const tempCanvas   = document.getElementById('tempCanvas');
-  const prevBtn      = document.getElementById('prevBtn');
-  const nextBtn      = document.getElementById('nextBtn');
-  const pageInfo     = document.getElementById('pageInfo');
-  const imageInfo    = document.getElementById('imageInfo');
-  const frameRange   = document.getElementById('frameRange');
-  const metaDiv      = document.getElementById('metaData');
-  const zoomInput    = document.getElementById("zoomInput");
-  const chapterList  = document.getElementById("chapterList");
-  const chapterDir   = document.getElementById("chapterDirectory");
-  const exportBtn    = document.getElementById("exportChapterBtn");
-  const mergeBtn     = document.getElementById("mergeBtn");
-  const dirPrevBtn   = document.getElementById("dirPrevBtn");
-  const dirNextBtn   = document.getElementById("dirNextBtn");
-  const dirPageInfo  = document.getElementById("dirPageInfo");
-  const pageControls = document.getElementById("pageControls");
-  const zoomDiv      = document.getElementById("zoomDiv");
-
-  // 全局变量
-  let xtc = null;
-  let xtg = null;
-  let currentPage = 0;
-  // 目录分页变量
-  let currentDirPage = 0;
-  let totalDirPages = 0;
-
-  // 初始化
-  init();
-
-  function init() {
-    LOG('Initializing XTC Viewer...');
-    // 绑定事件
-    fileInput.addEventListener('change', handleFileSelect);
-    prevBtn.addEventListener('click', () => {
-      if (mergedBook) {
-        currentPage > 0 && renderMergedPage(currentPage - 1);
-      } else if (xtc) {
-        currentPage > 0 && renderPage(currentPage - 1);
-      }
-    });
-    nextBtn.addEventListener('click', () => {
-      if (mergedBook) {
-        currentPage < mergedBook.indexTable.length - 1 && renderMergedPage(currentPage + 1);
-      } else if (xtc) {
-        currentPage < xtc.indexTable.length - 1 && renderPage(currentPage + 1);
-      }
-    });
-    frameRange.addEventListener('input', e => {
-      const pageNum = Number(e.target.value);
-      if (mergedBook) {
-        renderMergedPage(pageNum);
+      if (val === -1 || isNaN(val)) {
+        // 透明
+        data[i++] = 0;
+        data[i++] = 0;
+        data[i++] = 0;
+        data[i++] = 0;
       } else {
-        renderPage(pageNum);
+        // 灰度值：0=白，255=黑 → Canvas 中需反转一次（因为 Canvas 0=黑）
+        const gray = 255 - Math.max(0, Math.min(255, val));
+        data[i++] = gray;
+        data[i++] = gray;
+        data[i++] = gray;
+        data[i++] = 255;
       }
-    });
-    zoomInput.addEventListener("input", renderImage);
-    // 目录分页控制
-    dirPrevBtn.addEventListener('click', () => changeDirectoryPage(-1));
-    dirNextBtn.addEventListener('click', () => changeDirectoryPage(1));
-    // 导出和合并按钮
-    exportBtn.addEventListener('click', exportAllChaptersAsXTC);
-    mergeBtn.addEventListener('click', mergeDirectoryToBook);
-    
-    // 键盘翻页
-    document.addEventListener("keydown", e => {
-      if (!xtc && !mergedBook) return;
-      
-      if (mergedBook) {
-        if (e.key === "ArrowLeft" && currentPage > 0) renderMergedPage(currentPage - 1);
-        if (e.key === "ArrowRight" && currentPage < mergedBook.indexTable.length - 1) renderMergedPage(currentPage + 1);
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
+
+// 将像素数据转为 txtpng 文本
+function pixelsToTxtpngText(pixels) {
+  const lines = [];
+  for (let y = 0; y < 800; y++) {
+    const row = [];
+    for (let x = 0; x < 480; x++) {
+      const idx = (y * 480 + x) * 4;
+      const r = pixels[idx];
+      const g = pixels[idx + 1];
+      const b = pixels[idx + 2];
+      const a = pixels[idx + 3];
+
+      if (a === 0) {
+        row.push("-1");
       } else {
-        if (e.key === "ArrowLeft" && currentPage > 0) renderPage(currentPage - 1);
-        if (e.key === "ArrowRight" && currentPage < xtc.indexTable.length - 1) renderPage(currentPage + 1);
+        row.push(rgbToGray255(r, g, b).toString());
       }
-      
-      // 目录分页快捷键
-      if (e.key === "PageUp" && currentDirPage > 0) changeDirectoryPage(-1);
-      if (e.key === "PageDown" && currentDirPage < totalDirPages - 1) changeDirectoryPage(1);
-    });
+    }
+    lines.push(row.join(" "));
   }
+  return lines.join("\n");
+}
 
-  // 导出章节目录为独立XTC
-  function exportAllChaptersAsXTC() {
-    if (!xtc || xtc.chapters.length === 0) {
-      alert('No chapters to export!');
-      return;
-    }
-    
-    try {
-      LOG('Exporting chapter directory as XTC...');
-      // 生成多页章节目录的XTC数据
-      const metadata = {
-        title: `${xtc.metadata?.title || 'Book'} - Complete Chapter Directory`,
-        author: xtc.metadata?.author || 'XtcViewer',
-        publisher: xtc.metadata?.publisher || '',
-        language: xtc.metadata?.language || 'en'
-      };
-      
-      // 生成多页XTC
-      const xtcBuffer = XTC_Writer.chaptersToMultiPageXTC(xtc.chapters, metadata);
-      
-      // 创建Blob并下载
-      const blob = new Blob([xtcBuffer], { type: 'application/octet-stream' });
-      const baseName = (xtc.metadata?.title || 'chapter_directory').replace(/[^a-zA-Z0-9_.-]/g, '_');
-      const fileName = `${baseName}_directory.xtc`;
-      
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = fileName;
-      a.click();
-      
-      // 释放URL
-      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-      alert(`Success! Exported chapter directory (${totalDirPages} pages):\n${fileName}`);
-    } catch (err) {
-      alert('Export failed: ' + err.message);
-      console.error('Export error:', err);
-    }
-  }
+// 下载文本
+function downloadTextAsFile(text, filename) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
-  // 合并章节目录到原书籍
-  function mergeDirectoryToBook() {
-    if (!xtc || !originalBookBuffer || xtc.chapters.length === 0) {
-      alert('No book loaded or no chapters to merge!');
-      return;
-    }
-    
-    try {
-      LOG('Merge started - Chapters count:', xtc.chapters.length);
-      LOG('Original book buffer size:', originalBookBuffer.byteLength);
+// =============== 处理 PNG 文件 ===============
+function processPngFile(file) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      // 设置canvas大小为固定值：480x800
+      canvas.width = 480;
+      canvas.height = 800;
       
-      // 1. 生成章节目录XTC
-      const dirMetadata = {
-        title: `${xtc.metadata?.title || 'Book'} - Chapter Directory`,
-        author: xtc.metadata?.author || 'XtcViewer',
-        publisher: xtc.metadata?.publisher || '',
-        language: xtc.metadata?.language || 'en'
-      };
-      
-      // 生成目录XTC
-      const dirXtcBuffer = XTC_Writer.chaptersToMultiPageXTC(xtc.chapters, dirMetadata);
-      
-      // 2. 合并目录和原书籍
-      const mergedBuffer = XTC_Writer.mergeDirectoryAndBook(dirXtcBuffer, originalBookBuffer);
-      
-      // 3. 解析合并后的书籍并显示
-      mergedBook = new XTC_File(mergedBuffer);
-      
-      // 4. 显示合并后的书籍
-      renderMergedPage(0); // 从目录第一页开始显示
-      
-      // 5. 提供下载
-      const blob = new Blob([mergedBuffer], { type: 'application/octet-stream' });
-      const baseName = (xtc.metadata?.title || 'merged_book').replace(/[^a-zA-Z0-9_.-]/g, '_');
-      const fileName = `${baseName}_with_directory.xtc`;
-      
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = fileName;
-      a.click();
-      
-      // 释放URL
-      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-      
-      alert(`Success! Merged book created with ${mergedBook.indexTable.length} pages:\n${fileName}`);
-    } catch (err) {
-      alert('Merge failed: ' + err.message);
-      console.error('Merge error:', err);
-    }
-  }
+      // 图像拉伸以填充canvas
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // 处理文件选择
-  function handleFileSelect(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    // 重置状态
-    xtc = null;
-    xtg = null;
-    mergedBook = null;
-    currentPage = 0;
-    currentDirPage = 0;
-    totalDirPages = 0;
-    
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      try {
-        const buffer = e.target.result;
-        const dv = new DataView(buffer);
-        const mark = dv.getUint32(0, LE);
-        
-        // 尝试解析为XTC/XTCH
-        if (mark === MARK.XTC || mark === MARK.XTCH) {
-          xtc = new XTC_File(buffer);
-          originalBookBuffer = buffer; // 保存原始书籍数据用于合并
-          
-          // 更新UI
-          updateChapterDirectory();
-          chapterDir.style.display = xtc.chapters.length > 0 ? 'block' : 'none';
-          updateMetadata();
-          renderPage(0);
-          
-          // 更新控制
-          frameRange.max = xtc.indexTable.length - 1;
-          frameRange.value = 0;
-        } 
-        // 尝试解析为XTG/XTH
-        else if (mark === MARK.XTG || mark === MARK.XTH) {
-          xtg = new XTGH_Image(buffer);
-          chapterDir.style.display = 'none';
-          updateMetadata();
-          renderImage();
-          
-          // 更新控制
-          frameRange.max = 0;
-          frameRange.value = 0;
-          pageInfo.textContent = '1 / 1';
-        } 
-        else {
-          alert('Unsupported file format');
-        }
-      } catch (err) {
-        alert('Failed to load file: ' + err.message);
-        console.error('Load error:', err);
-      }
+      const imageData = ctx.getImageData(0, 0, 480, 800);
+      const txtpngText = pixelsToTxtpngText(imageData.data);
+      resolve({ file, txtpngText });
     };
-    reader.readAsArrayBuffer(file);
-  }
+  });
+}
 
-  // 更新章节目录
-  function updateChapterDirectory() {
-    if (!xtc || xtc.chapters.length === 0) return;
-    
-    totalDirPages = Math.ceil(xtc.chapters.length / CHAPTERS_PER_PAGE);
-    renderChapterDirectoryPage(currentDirPage);
-    updateDirPageInfo();
-  }
+// =============== 处理 txtpng 文件 ===============
+async function processTxtpngFile(file) {
+  const text = await file.text();
+  return { file, txtpngText: text, type: 'txtpng' };
+}
 
-  // 渲染章节目录页
-  function renderChapterDirectoryPage(pageNum) {
-    if (!xtc || xtc.chapters.length === 0) return;
-    
-    chapterList.innerHTML = '';
-    const startIdx = pageNum * CHAPTERS_PER_PAGE;
-    const endIdx = Math.min(startIdx + CHAPTERS_PER_PAGE, xtc.chapters.length);
-    const currentChapters = xtc.chapters.slice(startIdx, endIdx);
-    
-    currentChapters.forEach((ch, idx) => {
-      const li = document.createElement('li');
-      li.className = 'chapter-item';
-      
-      // 处理章节名称换行显示
-      const chapterName = ch.chapterName || `Chapter ${startIdx + idx + 1}`;
-      const nameLines = wrapText(chapterName, MAX_CHAR_PER_LINE);
-      let nameHtml = '';
-      nameLines.forEach(line => {
-        nameHtml += `<strong>${line}</strong><br>`;
-      });
-      
-      li.innerHTML = `
-        ${nameHtml}
-        Pages: ${ch.startPage} - ${ch.endPage}
-      `;
-      
-      // 点击章节跳转到对应页面
-      li.addEventListener('click', () => {
-        if (mergedBook) {
-          // 合并后的书籍需要加上目录页数偏移
-          const dirPageCount = mergedBook.indexTable.length - xtc.indexTable.length;
-          renderMergedPage(ch.startPage + dirPageCount);
-        } else {
-          renderPage(ch.startPage);
-        }
-      });
-      
-      // 高亮当前章节
-      if (xtc.getCurrentChapter(currentPage) === ch) {
-        li.classList.add('active');
-      }
-      
-      chapterList.appendChild(li);
-    });
-  }
+// =============== 主逻辑 ===============
+document.getElementById("fileInput").addEventListener("change", async (e) => {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
 
-  // 更改目录页码
-  function changeDirectoryPage(delta) {
-    const newPage = currentDirPage + delta;
-    if (newPage >= 0 && newPage < totalDirPages) {
-      currentDirPage = newPage;
-      renderChapterDirectoryPage(currentDirPage);
-      updateDirPageInfo();
+  const container = document.getElementById("previewContainer");
+  container.innerHTML = "<p>处理中...</p>";
+
+  const tasks = [];
+
+  for (const file of files) {
+    if (file.name.toLowerCase().endsWith('.png')) {
+      tasks.push(processPngFile(file));
+    } else if (file.name.toLowerCase().endsWith('.txtpng')) {
+      tasks.push(processTxtpngFile(file));
     }
   }
 
-  // 更新目录页码信息
-  function updateDirPageInfo() {
-    dirPageInfo.textContent = `Page ${currentDirPage + 1} / ${totalDirPages}`;
-    dirPrevBtn.disabled = currentDirPage === 0;
-    dirNextBtn.disabled = currentDirPage === totalDirPages - 1;
-  }
+  const results = await Promise.all(tasks);
+  container.innerHTML = "";
 
-  // 渲染指定页
-  function renderPage(pageNum) {
-    if (!xtc || pageNum < 0 || pageNum >= xtc.indexTable.length) return;
-    
-    currentPage = pageNum;
-    const image = xtc.getPageImage(pageNum);
-    if (!image) return;
-    
-    const imgData = image.getImageData();
-    canvas.width = imgData.width;
-    canvas.height = imgData.height;
-    
-    const ctx = canvas.getContext('2d');
-    const id = ctx.createImageData(imgData.width, imgData.height);
-    id.data.set(imgData.imageData);
-    ctx.putImageData(id, 0, 0);
-    
-    renderImage();
-    updatePageInfo();
-    updateChapterHighlight();
-  }
+  results.forEach(({ file, txtpngText, type }) => {
+    const baseName = file.name.replace(/\.(png|txtpng)$/i, "");
+    const txtpngName = `${baseName}.txtpng`;
 
-  // 渲染合并后的书籍页面
-  function renderMergedPage(pageNum) {
-    if (!mergedBook || pageNum < 0 || pageNum >= mergedBook.indexTable.length) return;
-    
-    currentPage = pageNum;
-    const image = mergedBook.getPageImage(pageNum);
-    if (!image) return;
-    
-    const imgData = image.getImageData();
-    canvas.width = imgData.width;
-    canvas.height = imgData.height;
-    
-    const ctx = canvas.getContext('2d');
-    const id = ctx.createImageData(imgData.width, imgData.height);
-    id.data.set(imgData.imageData);
-    ctx.putImageData(id, 0, 0);
-    
-    renderImage();
-    updatePageInfo();
-    updateChapterHighlight();
-  }
+    const div = document.createElement("div");
+    div.className = "preview-item";
 
-  // 应用缩放并显示图像
-  function renderImage() {
-    if (!canvas.width || !canvas.height) return;
-    
-    const zoom = parseInt(zoomInput.value) / 100;
-    canvas.style.width = `${canvas.width * zoom}px`;
-    canvas.style.height = `${canvas.height * zoom}px`;
-    
-    imageInfo.textContent = `${canvas.width} × ${canvas.height} px (${zoomInput.value}%)`;
-  }
+    const h3 = document.createElement("h3");
+    h3.textContent = file.name;
+    div.appendChild(h3);
 
-  // 更新页码信息
-  function updatePageInfo() {
-    const totalPages = mergedBook ? mergedBook.indexTable.length : (xtc ? xtc.indexTable.length : 1);
-    pageInfo.textContent = `${currentPage + 1} / ${totalPages}`;
-    frameRange.value = currentPage;
-    
-    // 更新按钮状态
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage === totalPages - 1;
-  }
+    const fileType = document.createElement("div");
+    fileType.className = "file-type";
+    fileType.textContent = type === 'png' ? "来源：PNG（已转换）" : "来源：txtpng（直接预览）";
+    div.appendChild(fileType);
 
-  // 更新章节高亮
-  function updateChapterHighlight() {
-    if (!xtc || xtc.chapters.length === 0) return;
-    
-    const currentChapter = mergedBook 
-      ? xtc.chapters.find(ch => {
-          const dirPageCount = mergedBook.indexTable.length - xtc.indexTable.length;
-          return currentPage >= ch.startPage + dirPageCount && currentPage <= ch.endPage + dirPageCount;
-        })
-      : xtc.getCurrentChapter(currentPage);
-    
-    // 更新列表项高亮
-    const items = chapterList.getElementsByClassName('chapter-item');
-    Array.from(items).forEach(item => {
-      item.classList.remove('active');
-    });
-    
-    if (currentChapter) {
-      const startIdx = currentDirPage * CHAPTERS_PER_PAGE;
-      const chapterIndex = xtc.chapters.indexOf(currentChapter);
-      
-      // 如果当前章节在当前目录页中，则高亮
-      if (chapterIndex >= startIdx && chapterIndex < startIdx + CHAPTERS_PER_PAGE) {
-        const itemIndex = chapterIndex - startIdx;
-        if (items[itemIndex]) {
-          items[itemIndex].classList.add('active');
-        }
-      }
+    const canvas = document.createElement("canvas");
+    canvas.className = "preview";
+    canvas.width = 480;
+    canvas.height = 800;
+    renderTxtpngToCanvas(txtpngText, canvas);
+    div.appendChild(canvas);
+
+    if (type === 'png') {
+      const btn = document.createElement("button");
+      btn.textContent = `下载 ${txtpngName}`;
+      btn.onclick = () => downloadTextAsFile(txtpngText, txtpngName);
+      div.appendChild(btn);
     }
-  }
 
-  // 更新元数据显示
-  function updateMetadata() {
-    let html = '';
-    
-    if (xtc) {
-      html = '<strong>Metadata:</strong><br>';
-      if (xtc.metadata) {
-        html += `Title: ${xtc.metadata.title}<br>`;
-        html += `Author: ${xtc.metadata.author}<br>`;
-        html += `Publisher: ${xtc.metadata.publisher}<br>`;
-        html += `Language: ${xtc.metadata.language}<br>`;
-        html += `Chapters: ${xtc.metadata.chapterCount || 0}<br>`;
-        html += `Pages: ${xtc.header.pageCount}`;
-      } else {
-        html += 'No metadata available<br>';
-        html += `Pages: ${xtc.header.pageCount}`;
-      }
-    } else if (xtg) {
-      html = '<strong>Image Info:</strong><br>';
-      html += `Format: ${xtg.header.mark === MARK.XTG ? 'XTG' : 'XTH'}<br>`;
-      html += `Size: ${xtg.header.width} × ${xtg.header.height}<br>`;
-      html += `Color mode: ${xtg.header.colorMode === 0 ? '1-bit' : '2-bit'}`;
-    }
-    
-    metaDiv.innerHTML = html;
-  }
-})();
+    container.appendChild(div);
+  });
+});
 </script>
+
 </body>
 </html>
