@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PNG / txtpng 预览与转换工具</title>
+  <title>PNG / pngtxt 预览与转换工具</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,10 +14,16 @@
     h1 { text-align: center; }
     .upload-area {
       border: 2px dashed #4CAF50;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
       margin: 20px 0;
       background: #f0fff0;
+      transition: background 0.3s;
+      border-radius: 8px;
+    }
+    .upload-area.dragover {
+      background: #e0f7e0;
+      border-color: #2E7D32;
     }
     .preview-container {
       display: flex;
@@ -30,6 +36,7 @@
       padding: 10px;
       width: 480px;
       background: white;
+      border-radius: 4px;
     }
     canvas.preview {
       image-rendering: pixelated;
@@ -43,70 +50,77 @@
       margin-top: 10px;
       padding: 6px 12px;
       cursor: pointer;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      border-radius: 4px;
+    }
+    button:hover { background: #388E3C; }
+    #batchDownloadBtn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #1976D2;
+    }
+    #batchDownloadBtn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
     }
     .file-type {
       font-size: 0.9em;
       color: #666;
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
-<h1>PNG / txtpng 预览与转换工具</h1>
+<h1>PNG / pngtxt 预览与转换工具</h1>
 
-<div class="upload-area">
-  <p>上传 PNG 图片（转为 txtpng）或 txtpng 文本文件（直接预览）</p>
-  <input type="file" id="fileInput" accept=".png,.txtpng" multiple />
+<div class="upload-area" id="dropZone">
+  <p>📁 拖拽 PNG 或 .pngtxt 文件到这里，或</p>
+  <input type="file" id="fileInput" accept=".png,.pngtxt" multiple style="margin-top:10px;" />
 </div>
+
+<button id="batchDownloadBtn" disabled>⬇️ 批量下载所有生成的 .pngtxt</button>
 
 <div class="preview-container" id="previewContainer"></div>
 
 <script>
-// =============== 工具函数 ===============
+// =============== 全局状态 ===============
+let pngResults = []; // 只存由 PNG 转换来的 {filename, content}
 
+// =============== 工具函数 ===============
 function rgbToGray255(r, g, b) {
   return Math.round(255 - (0.299 * r + 0.587 * g + 0.114 * b));
 }
 
-// 渲染 txtpng 数据到 Canvas
-function renderTxtpngToCanvas(txtpngText, canvas) {
+function renderpngtxtToCanvas(pngtxtText, canvas) {
   const ctx = canvas.getContext("2d");
   const imageData = ctx.createImageData(480, 800);
   const data = imageData.data;
 
   let i = 0;
-  const lines = txtpngText.trim().split("\n");
+  const lines = pngtxtText.trim().split("\n");
 
-  // 容错：最多处理 800 行
   for (let y = 0; y < 800; y++) {
     const line = lines[y] || "";
     const values = line.trim() ? line.trim().split(/\s+/).map(Number) : [];
-    
     for (let x = 0; x < 480; x++) {
       const val = (x < values.length) ? values[x] : -1;
-
       if (val === -1 || isNaN(val)) {
-        // 透明
-        data[i++] = 0;
-        data[i++] = 0;
-        data[i++] = 0;
-        data[i++] = 0;
+        data[i++] = 0; data[i++] = 0; data[i++] = 0; data[i++] = 0;
       } else {
-        // 灰度值：0=白，255=黑 → Canvas 中需反转一次（因为 Canvas 0=黑）
         const gray = 255 - Math.max(0, Math.min(255, val));
-        data[i++] = gray;
-        data[i++] = gray;
-        data[i++] = gray;
-        data[i++] = 255;
+        data[i++] = gray; data[i++] = gray; data[i++] = gray; data[i++] = 255;
       }
     }
   }
-
   ctx.putImageData(imageData, 0, 0);
 }
 
-// 将像素数据转为 txtpng 文本
-function pixelsToTxtpngText(pixels) {
+function pixelsTopngtxtText(pixels) {
   const lines = [];
   for (let y = 0; y < 800; y++) {
     const row = [];
@@ -116,7 +130,6 @@ function pixelsToTxtpngText(pixels) {
       const g = pixels[idx + 1];
       const b = pixels[idx + 2];
       const a = pixels[idx + 3];
-
       if (a === 0) {
         row.push("-1");
       } else {
@@ -128,7 +141,6 @@ function pixelsToTxtpngText(pixels) {
   return lines.join("\n");
 }
 
-// 下载文本
 function downloadTextAsFile(text, filename) {
   const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -138,91 +150,162 @@ function downloadTextAsFile(text, filename) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 100);
 }
 
-// =============== 处理 PNG 文件 ===============
-function processPngFile(file) {
+// =============== 处理文件 ===============
+async function processPngFile(file) {
   return new Promise((resolve) => {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = () => {
       const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      // 设置canvas大小为固定值：480x800
       canvas.width = 480;
       canvas.height = 800;
-      
-      // 图像拉伸以填充canvas
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(img, 0, 0, 480, 800);
 
       const imageData = ctx.getImageData(0, 0, 480, 800);
-      const txtpngText = pixelsToTxtpngText(imageData.data);
-      resolve({ file, txtpngText });
+      const pngtxtText = pixelsTopngtxtText(imageData.data);
+      resolve({ file, pngtxtText });
     };
   });
 }
 
-// =============== 处理 txtpng 文件 ===============
-async function processTxtpngFile(file) {
+async function processpngtxtFile(file) {
   const text = await file.text();
-  return { file, txtpngText: text, type: 'txtpng' };
+  return { file, pngtxtText: text };
 }
 
-// =============== 主逻辑 ===============
-document.getElementById("fileInput").addEventListener("change", async (e) => {
-  const files = Array.from(e.target.files);
-  if (files.length === 0) return;
+// =============== 批量下载逻辑 ===============
+function triggerBatchDownload() {
+  if (pngResults.length === 0) return;
+  
+  // 逐个下载，间隔 100ms 避免被拦截
+  pngResults.forEach((result, index) => {
+    setTimeout(() => {
+      const baseName = result.file.name.replace(/\.png$/i, "");
+      downloadTextAsFile(result.pngtxtText, `${baseName}.pngtxt`);
+    }, index * 150); // 每隔 150ms 触发一个
+  });
 
-  const container = document.getElementById("previewContainer");
-  container.innerHTML = "<p>处理中...</p>";
+  alert(`正在下载 ${pngResults.length} 个 .pngtxt 文件，请在浏览器下载栏确认。`);
+}
 
-  const tasks = [];
+// =============== 渲染预览 ===============
+function renderPreview({ file, pngtxtText, type }) {
+  const baseName = file.name.replace(/\.(png|pngtxt)$/i, "");
+  const pngtxtName = `${baseName}.pngtxt`;
 
-  for (const file of files) {
+  const div = document.createElement("div");
+  div.className = "preview-item";
+
+  const h3 = document.createElement("h3");
+  h3.textContent = file.name;
+  div.appendChild(h3);
+
+  const fileType = document.createElement("div");
+  fileType.className = "file-type";
+  fileType.textContent = type === 'png' ? "来源：PNG（已转换）" : "来源：pngtxt（直接预览）";
+  div.appendChild(fileType);
+
+  const canvas = document.createElement("canvas");
+  canvas.className = "preview";
+  canvas.width = 480;
+  canvas.height = 800;
+  renderpngtxtToCanvas(pngtxtText, canvas);
+  div.appendChild(canvas);
+
+  if (type === 'png') {
+    const btn = document.createElement("button");
+    btn.textContent = `下载 ${pngtxtName}`;
+    btn.onclick = () => downloadTextAsFile(pngtxtText, pngtxtName);
+    div.appendChild(btn);
+  }
+
+  document.getElementById("previewContainer").appendChild(div);
+}
+
+// =============== 处理上传 ===============
+async function handleFiles(files) {
+  const validFiles = Array.from(files).filter(f =>
+    f.name.toLowerCase().endsWith('.png') || f.name.toLowerCase().endsWith('.pngtxt')
+  );
+
+  if (validFiles.length === 0) return;
+
+  // 重置状态
+  pngResults = [];
+  document.getElementById("previewContainer").innerHTML = "<p>处理中...</p>";
+  document.getElementById("batchDownloadBtn").disabled = true;
+
+  const results = [];
+  for (const file of validFiles) {
     if (file.name.toLowerCase().endsWith('.png')) {
-      tasks.push(processPngFile(file));
-    } else if (file.name.toLowerCase().endsWith('.txtpng')) {
-      tasks.push(processTxtpngFile(file));
+      const res = await processPngFile(file);
+      res.type = 'png';
+      pngResults.push(res); // 仅 PNG 结果用于批量下载
+      results.push(res);
+    } else if (file.name.toLowerCase().endsWith('.pngtxt')) {
+      const res = await processpngtxtFile(file);
+      res.type = 'pngtxt';
+      results.push(res);
     }
   }
 
-  const results = await Promise.all(tasks);
-  container.innerHTML = "";
+  // 渲染所有
+  document.getElementById("previewContainer").innerHTML = "";
+  results.forEach(renderPreview);
 
-  results.forEach(({ file, txtpngText, type }) => {
-    const baseName = file.name.replace(/\.(png|txtpng)$/i, "");
-    const txtpngName = `${baseName}.txtpng`;
+  // 启用批量下载按钮（如果有 PNG）
+  document.getElementById("batchDownloadBtn").disabled = (pngResults.length === 0);
+}
 
-    const div = document.createElement("div");
-    div.className = "preview-item";
+// =============== 事件绑定 ===============
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+const batchBtn = document.getElementById("batchDownloadBtn");
 
-    const h3 = document.createElement("h3");
-    h3.textContent = file.name;
-    div.appendChild(h3);
-
-    const fileType = document.createElement("div");
-    fileType.className = "file-type";
-    fileType.textContent = type === 'png' ? "来源：PNG（已转换）" : "来源：txtpng（直接预览）";
-    div.appendChild(fileType);
-
-    const canvas = document.createElement("canvas");
-    canvas.className = "preview";
-    canvas.width = 480;
-    canvas.height = 800;
-    renderTxtpngToCanvas(txtpngText, canvas);
-    div.appendChild(canvas);
-
-    if (type === 'png') {
-      const btn = document.createElement("button");
-      btn.textContent = `下载 ${txtpngName}`;
-      btn.onclick = () => downloadTextAsFile(txtpngText, txtpngName);
-      div.appendChild(btn);
-    }
-
-    container.appendChild(div);
-  });
+// 点击上传
+fileInput.addEventListener("change", (e) => {
+  handleFiles(e.target.files);
 });
+
+// 拖拽上传
+["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+  dropZone.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+["dragenter", "dragover"].forEach(eventName => {
+  dropZone.addEventListener(eventName, highlight, false);
+});
+
+["dragleave", "drop"].forEach(eventName => {
+  dropZone.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight() {
+  dropZone.classList.add("dragover");
+}
+
+function unhighlight() {
+  dropZone.classList.remove("dragover");
+}
+
+dropZone.addEventListener("drop", (e) => {
+  const dt = e.dataTransfer;
+  const files = dt.files;
+  handleFiles(files);
+});
+
+// 批量下载
+batchBtn.addEventListener("click", triggerBatchDownload);
 </script>
 
 </body>
